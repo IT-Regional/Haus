@@ -33,7 +33,7 @@
         <ul class="dash-navbar">
             <li class="dash-item">
                 <a href="{{ route('dashboard') }}" class="dash-link"><span class="dash-micon"><i
-                            class="ti ti-home"></i></span><span class="dash-mtext">{{ __('Dashboard Administracion') }}</span></a>
+                            class="ti ti-home"></i></span><span class="dash-mtext">{{ __('Dashboard') }}</span></a>
             </li>
 
             @if (\Auth::user()->type == 'super admin')
@@ -41,7 +41,7 @@
                     <a href="{{ route('users.index') }}"
                         class="dash-link {{ Request::segment(1) == 'users' ? 'active' : '' }}">
                         <span class="dash-micon"><i class="ti ti-users"></i></span> <span
-                            class="dash-mtext">{{ __('Condominio') }} </span>
+                            class="dash-mtext">{{ __('Company') }} </span>
                     </a>
                 </li>
             @endif
@@ -61,13 +61,12 @@
                         </li>
                         <li
                             class="dash-item dash-hasmenu {{ Request::segment(1) == 'client' || Request::segment(1) == 'clientlogs' ? 'active' : '' }}">
-                            <a class="dash-link" href="{{ route('client.index') }}">{{ __('Residente') }}</a>
+                            <a class="dash-link" href="{{ route('client.index') }}">{{ __('Client') }}</a>
 
                         </li>
 
                     </ul>
                 </li>
-                
             @elseif(\Auth::user()->type == 'employee')
                 <li class="dash-item  {{ Request::segment(1) == 'employee' ? 'active ' : '' }}">
                     <a href="{{ route('employee.show', \Crypt::encrypt(\Auth::user()->id)) }}" class="dash-link"><span
