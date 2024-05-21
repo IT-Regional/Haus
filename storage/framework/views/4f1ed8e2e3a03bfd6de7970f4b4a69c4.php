@@ -1,40 +1,42 @@
-<?php echo e(Form::open(['url' => 'lead'])); ?>
+<form action="<?php echo e(route('amenidades.store')); ?>" method="post" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
+    <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <?php echo e(Form::label('name',__('Nombre de la Amenidad'),['class'=>'form-label'])); ?>
 
-<?php
-    $plansettings = App\Models\Utility::plansettings();
-?>
-<div class="row">
-    <div class="form-group col-md-6">
-        <?php echo e(Form::label('subject', __('Subject'), ['class' => 'col-form-label'])); ?>
+                        <?php echo e(Form::text('name',null,array('class'=>'form-control','placeholder'=>__('Ingrese el nombre')))); ?>
 
-        <?php echo e(Form::text('subject', null, ['class' => 'form-control', 'required' => 'required'])); ?>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <?php echo e(Form::label('description',__('Descripcion'),['class'=>'form-label'])); ?>
 
-    </div>
-    <div class="form-group col-md-6">
-        <?php echo e(Form::label('name', __('Name'), ['class' => 'col-form-label'])); ?>
+                    <?php echo e(Form::textarea('description',null,array('class'=>'form-control','placeholder'=>__('Ingrese la descripción')))); ?>
 
-        <?php echo e(Form::text('name', null, ['class' => 'form-control', 'required' => 'required'])); ?>
+                </div>
+                <div class="form-group col-md-6">
+                    <?php echo e(Form::label('status', __('Estado'), ['class' => 'col-form-label'])); ?>
 
-    </div>
-    <div class="form-group col-md-6">
-        <?php echo e(Form::label('email', __('Email'), ['class' => 'col-form-label'])); ?>
+                    <?php echo e(Form::select('status', [0 => 'No Reservada', 1 => 'Reservada'], null, ['class' => 'form-control', 'required' => 'required'])); ?>
 
-        <?php echo e(Form::text('email', null, ['class' => 'form-control', 'required' => 'required'])); ?>
+                </div>
+                <div class="form-group col-md-6">
+                    <?php echo e(Form::label('photo', __('Foto'), ['class' => 'col-form-label'])); ?>
 
-    </div>
-    <div class="form-group col-md-6">
-        <?php echo e(Form::label('phone_no', __('Phone No'), ['class' => 'col-form-label'])); ?>
+                    <?php echo e(Form::file('photo', ['class' => 'form-control'])); ?>
 
-        <?php echo e(Form::text('phone_no', null, ['class' => 'form-control', 'required' => 'required'])); ?>
+                </div>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('ability',__('Capacidad'),['class'=>'form-label'])); ?>
 
-    </div>
-</div>
-<div class="modal-footer pr-0">
-    <button type="button" class="btn  btn-light" data-bs-dismiss="modal"><?php echo e(__('Close')); ?></button>
-    <?php echo e(Form::submit(__('Create'), ['class' => 'btn  btn-primary'])); ?>
+                    <?php echo e(Form::number('ability',null,array('class'=>'form-control','placeholder'=>__('Ingrese la capacidad')))); ?>
 
-</div>
-
-<?php echo e(Form::close()); ?>
-
-<?php /**PATH C:\xampp\htdocs\main-file\resources\views/amenidades/create.blade.php ENDPATH**/ ?>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+</form><?php /**PATH C:\xampp\htdocs\main-file\resources\views/amenidades/create.blade.php ENDPATH**/ ?>

@@ -32,9 +32,26 @@
                                     <th><?php echo e(__('Descripcion')); ?></th>
                                     <th><?php echo e(__('Foto')); ?></th>
                                     <th><?php echo e(__('Capacidad')); ?></th>
+                                    <th><?php echo e(__('Estado')); ?></th>
                                     <th><?php echo e(__('Acciones')); ?></th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        <td><?php echo e($amenidad->name); ?></td>
+                                        <td><img src="" alt=""></td>
+                                         <td>
+                                            <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="50">
+                                        </td>
+                                        <td><?php echo e($amenidad->ability); ?></td>
+                                        <td><?php echo e($amenidad->status ? __('Reservada') : __('Disponible')); ?></td>
+                                        <td>
+                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Editar')); ?>" href="<?php echo e(route('amenidades.edit', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>

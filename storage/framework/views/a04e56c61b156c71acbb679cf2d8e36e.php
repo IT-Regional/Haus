@@ -206,7 +206,8 @@
                 </li>
             <?php endif; ?>
 
-            <li
+            <?php if(\Auth::user()->type == 'company'): ?>
+                <li
                         class="dash-item dash-hasmenu <?php echo e(Request::route()->getName() == 'systems.index' ? ' active' : ''); ?>">
                         <a a href="#!" class="dash-link">
                             <span class="dash-micon"><i class="ti ti-settings"></i></span><span
@@ -226,6 +227,30 @@
                                   
                                 </ul>
                     </li>
+            <?php else: ?>
+                <li
+                        class="dash-item dash-hasmenu <?php echo e(Request::route()->getName() == 'systems.index' ? ' active' : ''); ?>">
+                        <a a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-settings"></i></span><span
+                                class="dash-mtext"><?php echo e(__('Amenidades')); ?></span>
+                                <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu">
+                                    <li
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        <a class="dash-link"
+                                            href="<?php echo e(route('amenidades.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
+                                    </li>
+                                    <li
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        <a class="dash-link"
+                                            href="<?php echo e(route('amenidades.index')); ?>"><?php echo e(__('Ver Amenidad ')); ?></a>
+                                    </li>
+                                  
+                                </ul>
+                    </li>
+            <?php endif; ?>
+
+                
 
             <?php if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client'): ?>
                 <li

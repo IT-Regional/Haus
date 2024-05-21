@@ -31,9 +31,26 @@
                                     <th>{{__('Descripcion')}}</th>
                                     <th>{{__('Foto')}}</th>
                                     <th>{{__('Capacidad')}}</th>
+                                    <th>{{__('Estado')}}</th>
                                     <th>{{__('Acciones')}}</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach($amenidades as $amenidad)
+                                    <tr>
+                                        <td>{{ $amenidad->name }}</td>
+                                        <td><img src="" alt=""></td>
+                                         <td>
+                                            <img src="{{ asset($amenidad->photo) }}" alt="Foto" width="50">
+                                        </td>
+                                        <td>{{ $amenidad->ability }}</td>
+                                        <td>{{ $amenidad->status ? __('Reservada') : __('Disponible') }}</td>
+                                        <td>
+                                            <a data-bs-toggle="tooltip" title="{{__('Editar')}}" href="{{ route('amenidades.edit', $amenidad->id) }}" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>

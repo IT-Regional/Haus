@@ -206,7 +206,8 @@
                 </li>
             @endif
 
-            <li
+            @if (\Auth::user()->type == 'company')
+                <li
                         class="dash-item dash-hasmenu {{ Request::route()->getName() == 'systems.index' ? ' active' : '' }}">
                         <a a href="#!" class="dash-link">
                             <span class="dash-micon"><i class="ti ti-settings"></i></span><span
@@ -226,6 +227,30 @@
                                   
                                 </ul>
                     </li>
+            @else
+                <li
+                        class="dash-item dash-hasmenu {{ Request::route()->getName() == 'systems.index' ? ' active' : '' }}">
+                        <a a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-settings"></i></span><span
+                                class="dash-mtext">{{ __('Amenidades') }}</span>
+                                <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu">
+                                    <li
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        <a class="dash-link"
+                                            href="{{ route('amenidades.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        <a class="dash-link"
+                                            href="{{route('amenidades.index')}}">{{ __('Ver Amenidad ') }}</a>
+                                    </li>
+                                  
+                                </ul>
+                    </li>
+            @endif
+
+                
 
             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
                 <li
