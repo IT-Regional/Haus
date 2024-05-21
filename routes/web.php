@@ -3,6 +3,7 @@
 use App\Http\Controllers\AamarpayController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AmenidadesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
@@ -1916,3 +1917,6 @@ Route::any('/invoice-xendit-status', [XenditPaymentController::class, 'getInvoci
 
 Route::any('invoice-with-midtrans/', [MidtransController::class, 'invoicePayWithMidtrans'])->name('invoice.with.midtrans');
 Route::any('invoice-midtrans-status/', [MidtransController::class, 'getInvociePaymentStatus'])->name('invoice.midtrans.status');
+
+Route::get('/amenidades/dashboard', [AmenidadesController::class, 'dashboard'])->name('amenidades.dashboard');
+Route::resource('amenidades', AmenidadesController::class)->except(['show']);

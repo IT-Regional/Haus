@@ -51,17 +51,17 @@
                     class="dash-item dash-hasmenu {{ Request::segment(1) == 'employee' || Request::segment(1) == 'client' || Request::segment(1) == 'userlogs' || Request::segment(1) == 'clientlogs' ? 'active dash-trigger' : '' }}">
                     <a class="dash-link " data-toggle="collapse" role="button"
                         aria-controls="navbar-getting-started"><span class="dash-micon"><i
-                                class="ti ti-users"></i></span><span class="dash-mtext">{{ __('Staff') }}</span><span
+                                class="ti ti-users"></i></span><span class="dash-mtext">{{ __('Personal') }}</span><span
                             class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="dash-submenu">
                         <li
                             class="dash-item dash-hasmenu {{ Request::segment(1) == 'employee' || Request::segment(1) == 'userlogs' ? 'active ' : '' }}">
-                            <a class="dash-link" href="{{ route('employee.index') }}">{{ __('Employee') }}</span></a>
+                            <a class="dash-link" href="{{ route('employee.index') }}">{{ __('Empleados') }}</span></a>
 
                         </li>
                         <li
                             class="dash-item dash-hasmenu {{ Request::segment(1) == 'client' || Request::segment(1) == 'clientlogs' ? 'active' : '' }}">
-                            <a class="dash-link" href="{{ route('client.index') }}">{{ __('Client') }}</a>
+                            <a class="dash-link" href="{{ route('client.index') }}">{{ __('Residentes') }}</a>
 
                         </li>
 
@@ -205,6 +205,27 @@
                     </ul>
                 </li>
             @endif
+
+            <li
+                        class="dash-item dash-hasmenu {{ Request::route()->getName() == 'systems.index' ? ' active' : '' }}">
+                        <a a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-settings"></i></span><span
+                                class="dash-mtext">{{ __('Amenidades') }}</span>
+                                <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu">
+                                    <li
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        <a class="dash-link"
+                                            href="{{ route('amenidades.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        <a class="dash-link"
+                                            href="{{route('amenidades.index')}}">{{ __('Crear Amenidad ') }}</a>
+                                    </li>
+                                  
+                                </ul>
+                    </li>
 
             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
                 <li

@@ -33,7 +33,7 @@
         <ul class="dash-navbar">
             <li class="dash-item">
                 <a href="<?php echo e(route('dashboard')); ?>" class="dash-link"><span class="dash-micon"><i
-                            class="ti ti-home"></i></span><span class="dash-mtext"><?php echo e(__('Dashboard Administracion')); ?></span></a>
+                            class="ti ti-home"></i></span><span class="dash-mtext"><?php echo e(__('Dashboard')); ?></span></a>
             </li>
 
             <?php if(\Auth::user()->type == 'super admin'): ?>
@@ -41,7 +41,7 @@
                     <a href="<?php echo e(route('users.index')); ?>"
                         class="dash-link <?php echo e(Request::segment(1) == 'users' ? 'active' : ''); ?>">
                         <span class="dash-micon"><i class="ti ti-users"></i></span> <span
-                            class="dash-mtext"><?php echo e(__('Condominio')); ?> </span>
+                            class="dash-mtext"><?php echo e(__('Company')); ?> </span>
                     </a>
                 </li>
             <?php endif; ?>
@@ -51,17 +51,17 @@
                     class="dash-item dash-hasmenu <?php echo e(Request::segment(1) == 'employee' || Request::segment(1) == 'client' || Request::segment(1) == 'userlogs' || Request::segment(1) == 'clientlogs' ? 'active dash-trigger' : ''); ?>">
                     <a class="dash-link " data-toggle="collapse" role="button"
                         aria-controls="navbar-getting-started"><span class="dash-micon"><i
-                                class="ti ti-users"></i></span><span class="dash-mtext"><?php echo e(__('Staff')); ?></span><span
+                                class="ti ti-users"></i></span><span class="dash-mtext"><?php echo e(__('Personal')); ?></span><span
                             class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="dash-submenu">
                         <li
                             class="dash-item dash-hasmenu <?php echo e(Request::segment(1) == 'employee' || Request::segment(1) == 'userlogs' ? 'active ' : ''); ?>">
-                            <a class="dash-link" href="<?php echo e(route('employee.index')); ?>"><?php echo e(__('Employee')); ?></span></a>
+                            <a class="dash-link" href="<?php echo e(route('employee.index')); ?>"><?php echo e(__('Empleados')); ?></span></a>
 
                         </li>
                         <li
                             class="dash-item dash-hasmenu <?php echo e(Request::segment(1) == 'client' || Request::segment(1) == 'clientlogs' ? 'active' : ''); ?>">
-                            <a class="dash-link" href="<?php echo e(route('client.index')); ?>"><?php echo e(__('Residente')); ?></a>
+                            <a class="dash-link" href="<?php echo e(route('client.index')); ?>"><?php echo e(__('Residentes')); ?></a>
 
                         </li>
 
@@ -205,6 +205,27 @@
                     </ul>
                 </li>
             <?php endif; ?>
+
+            <li
+                        class="dash-item dash-hasmenu <?php echo e(Request::route()->getName() == 'systems.index' ? ' active' : ''); ?>">
+                        <a a href="#!" class="dash-link">
+                            <span class="dash-micon"><i class="ti ti-settings"></i></span><span
+                                class="dash-mtext"><?php echo e(__('Amenidades')); ?></span>
+                                <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu">
+                                    <li
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        <a class="dash-link"
+                                            href="<?php echo e(route('amenidades.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
+                                    </li>
+                                    <li
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        <a class="dash-link"
+                                            href="<?php echo e(route('amenidades.index')); ?>"><?php echo e(__('Crear Amenidad ')); ?></a>
+                                    </li>
+                                  
+                                </ul>
+                    </li>
 
             <?php if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client'): ?>
                 <li
