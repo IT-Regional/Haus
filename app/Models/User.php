@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Lab404\Impersonate\Models\Impersonate;
+use App\Models\Reserva;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -1079,5 +1080,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isUser()
     {
         return $this->type === 'user' ? 1 : 0;
+    }
+
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class);
     }
 }

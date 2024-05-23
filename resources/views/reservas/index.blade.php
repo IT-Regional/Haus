@@ -1,21 +1,11 @@
 @extends('layouts.admin')
 @section('page-title')
-    {{__('Crear amenidades')}}
+    {{__('Reservar Amenidades')}}
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item">{{__('Crear Amenidad')}}</li>
-@endsection
-
-@section('action-btn')
-    <div class="float-end">
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('amenidades.create') }}" data-bs-whatever="{{ __('Crear Amenidad') }}"
-            data-bs-original-title="{{ __('Create New Lead') }}">
-            <i data-bs-toggle="tooltip" title="{{ __('Crear Amenidad') }}" class="ti ti-plus text-white"></i>
-        </a>
-    </div>
+    <li class="breadcrumb-item">{{__('Reservar Amenidad')}}</li>
 @endsection
 
 @section('content')
@@ -31,7 +21,6 @@
                                     <th>{{__('Descripcion')}}</th>
                                     <th>{{__('Foto')}}</th>
                                     <th>{{__('Capacidad')}}</th>
-                                    <th>{{__('Estado')}}</th>
                                     <th>{{__('Acciones')}}</th>
                                 </tr>
                             </thead>
@@ -39,13 +28,14 @@
                                 @foreach($amenidades as $amenidad)
                                     <tr>
                                         <td>{{ $amenidad->name }}</td>
-                                         <td>
+                                        <td>{{ $amenidad->description }}</td>
+                                        <td>
                                             <img src="{{ asset($amenidad->photo) }}" alt="Foto" width="50">
                                         </td>
                                         <td>{{ $amenidad->ability }}</td>
-                                        <td>{{ $amenidad->status ? __('Reservada') : __('Disponible') }}</td>
                                         <td>
-                                            <a data-bs-toggle="tooltip" title="{{__('Editar')}}" href="{{ route('amenidades.edit', $amenidad->id) }}" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                            {{-- <a href="{{ route('reservas.create', $amenidad->id) }}">Reservar {{ $amenidad->nombre }}</a> --}}
+                                            <a data-bs-toggle="tooltip" title="{{__('Reservar')}}" href="{{ route('reservas.create', $amenidad->id) }}" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

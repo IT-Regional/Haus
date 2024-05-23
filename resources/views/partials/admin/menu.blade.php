@@ -243,7 +243,7 @@
                                     <li
                                         class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
                                         <a class="dash-link"
-                                            href="{{route('amenidades.index')}}">{{ __('Ver Amenidad ') }}</a>
+                                            href="{{route('reservas.index')}}">{{ __('Ver Amenidades') }}</a>
                                     </li>
                                   
                                 </ul>

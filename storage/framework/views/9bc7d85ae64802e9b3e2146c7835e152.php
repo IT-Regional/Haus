@@ -26,7 +26,8 @@
                                             <p class="text-muted text-sm mt-4 mb-2"><?php echo e(__('Total')); ?></p>
                                             <h6 class="mb-3"><?php echo e(__('Amenidades Ingresadas')); ?></h6>
                                             <h3 class="mb-0">
-                                                12
+                                                <?php echo e($totalAmenidades); ?>
+
                                             </h3>
                                         </div>
                                     </div>
@@ -40,7 +41,8 @@
                                             <p class="text-muted text-sm mt-4 mb-2"><?php echo e(__('Total')); ?></p>
                                             <h6 class="mb-3"><?php echo e(__('Amenidades Disponibles')); ?></h6>
                                             <h3 class="mb-0">
-                                                110
+                                                <?php echo e($amenidadesDisponibles); ?>
+
                                             </h3>
                                         </div>
                                     </div>
@@ -54,7 +56,8 @@
                                             <p class="text-muted text-sm mt-4 mb-2"><?php echo e(__('Total')); ?></p>
                                             <h6 class="mb-3"><?php echo e(__('Amenidades Reservadas')); ?></h6>
                                             <h3 class="mb-0">
-                                                22
+                                                <?php echo e($amenidadesReservadas); ?>
+
                                             </h3>
                                         </div>
                                     </div>

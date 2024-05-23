@@ -48,6 +48,7 @@ use App\Http\Controllers\AiTemplateController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\AwardTypeController;
 use App\Http\Controllers\ResignationController;
+use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ComplaintController;
@@ -1920,3 +1921,7 @@ Route::any('invoice-midtrans-status/', [MidtransController::class, 'getInvociePa
 
 Route::get('/amenidades/dashboard', [AmenidadesController::class, 'dashboard'])->name('amenidades.dashboard');
 Route::resource('amenidades', AmenidadesController::class)->except(['show']);
+
+Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create'])->name('reservas.create');
+Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store');
+Route::resource('reservas', ReservasController::class)->except(['create', 'show', 'store']);

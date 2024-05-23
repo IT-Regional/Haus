@@ -243,7 +243,7 @@
                                     <li
                                         class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
                                         <a class="dash-link"
-                                            href="<?php echo e(route('amenidades.index')); ?>"><?php echo e(__('Ver Amenidad ')); ?></a>
+                                            href="<?php echo e(route('reservas.index')); ?>"><?php echo e(__('Ver Amenidades')); ?></a>
                                     </li>
                                   
                                 </ul>

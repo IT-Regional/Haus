@@ -9,7 +9,14 @@ class AmenidadesController extends Controller
 {
     public function dashboard(){
         
-        return view('amenidades.dashboard');
+        $totalAmenidades = Amenidad::count();
+        $amenidadesDisponibles = Amenidad::where('status',false)->count();
+        $amenidadesReservadas = Amenidad::where('status', true)->count();
+        return view('amenidades.dashboard', compact(
+            'totalAmenidades', 
+            'amenidadesDisponibles',
+            'amenidadesReservadas',
+        ));
     }
 
     public function index(){

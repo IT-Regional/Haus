@@ -25,7 +25,7 @@
                                             <p class="text-muted text-sm mt-4 mb-2">{{__('Total')}}</p>
                                             <h6 class="mb-3">{{__('Amenidades Ingresadas')}}</h6>
                                             <h3 class="mb-0">
-                                                12
+                                                {{ $totalAmenidades }}
                                             </h3>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                             <p class="text-muted text-sm mt-4 mb-2">{{__('Total')}}</p>
                                             <h6 class="mb-3">{{__('Amenidades Disponibles')}}</h6>
                                             <h3 class="mb-0">
-                                                110
+                                                {{ $amenidadesDisponibles }}
                                             </h3>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                             <p class="text-muted text-sm mt-4 mb-2">{{__('Total')}}</p>
                                             <h6 class="mb-3">{{__('Amenidades Reservadas')}}</h6>
                                             <h3 class="mb-0">
-                                                22
+                                                {{ $amenidadesReservadas }}
                                             </h3>
                                         </div>
                                     </div>

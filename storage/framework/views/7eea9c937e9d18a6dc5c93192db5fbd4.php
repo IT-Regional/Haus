@@ -1,22 +1,12 @@
 
 <?php $__env->startSection('page-title'); ?>
-    <?php echo e(__('Crear amenidades')); ?>
+    <?php echo e(__('Reservar Amenidades')); ?>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
     <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
-    <li class="breadcrumb-item"><?php echo e(__('Crear Amenidad')); ?></li>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('action-btn'); ?>
-    <div class="float-end">
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="<?php echo e(route('amenidades.create')); ?>" data-bs-whatever="<?php echo e(__('Crear Amenidad')); ?>"
-            data-bs-original-title="<?php echo e(__('Create New Lead')); ?>">
-            <i data-bs-toggle="tooltip" title="<?php echo e(__('Crear Amenidad')); ?>" class="ti ti-plus text-white"></i>
-        </a>
-    </div>
+    <li class="breadcrumb-item"><?php echo e(__('Reservar Amenidad')); ?></li>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -32,7 +22,6 @@
                                     <th><?php echo e(__('Descripcion')); ?></th>
                                     <th><?php echo e(__('Foto')); ?></th>
                                     <th><?php echo e(__('Capacidad')); ?></th>
-                                    <th><?php echo e(__('Estado')); ?></th>
                                     <th><?php echo e(__('Acciones')); ?></th>
                                 </tr>
                             </thead>
@@ -40,13 +29,14 @@
                                 <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($amenidad->name); ?></td>
-                                         <td>
+                                        <td><?php echo e($amenidad->description); ?></td>
+                                        <td>
                                             <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="50">
                                         </td>
                                         <td><?php echo e($amenidad->ability); ?></td>
-                                        <td><?php echo e($amenidad->status ? __('Reservada') : __('Disponible')); ?></td>
                                         <td>
-                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Editar')); ?>" href="<?php echo e(route('amenidades.edit', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                            
+                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -58,4 +48,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/amenidades/index.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/reservas/index.blade.php ENDPATH**/ ?>
