@@ -10,40 +10,21 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body table-border-style">
-                    <div class="table-responsive">
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th>{{__('Nombre')}}</th>
-                                    <th>{{__('Descripcion')}}</th>
-                                    <th>{{__('Foto')}}</th>
-                                    <th>{{__('Capacidad')}}</th>
-                                    <th>{{__('Acciones')}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($amenidades as $amenidad)
-                                    <tr>
-                                        <td>{{ $amenidad->name }}</td>
-                                        <td>{{ $amenidad->description }}</td>
-                                        <td>
-                                            <img src="{{ asset($amenidad->photo) }}" alt="Foto" width="50">
-                                        </td>
-                                        <td>{{ $amenidad->ability }}</td>
-                                        <td>
-                                            {{-- <a href="{{ route('reservas.create', $amenidad->id) }}">Reservar {{ $amenidad->nombre }}</a> --}}
-                                            <a data-bs-toggle="tooltip" title="{{__('Reservar')}}" href="{{ route('reservas.create', $amenidad->id) }}" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+        @foreach ($amenidades as $amenidad)
+        <div class="col-md-4 col-sm-4">
+            <div class="card hover-shadow-lg">
+                    <div class="card-body user-card text-center client-box" style="height: 260px !important">
+                    <div class="avatar-parent-child">
+                        <img src="{{ asset($amenidad->photo) }}" alt="Foto" width="200" class="avatar avatar-lg" height="100">
                     </div>
+                    <div class="h6 mt-4 mb-0">
+                        {{ $amenidad->name}}
+                    </div>
+                    <br>
+                    <a data-bs-toggle="tooltip" title="{{__('Reservar')}}" href="{{ route('reservas.create', $amenidad->id) }}" class="btn btn-sm btn-primary">Reservar</a>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 @endsection

@@ -236,14 +236,20 @@
                                 <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu">
                                     <li
-                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.dashboard' ? ' active' : ''); ?>">
                                         <a class="dash-link"
                                             href="<?php echo e(route('amenidades.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
                                     </li>
                                     <li
-                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.index' ? ' active' : ''); ?>">
                                         <a class="dash-link"
                                             href="<?php echo e(route('reservas.index')); ?>"><?php echo e(__('Ver Amenidades')); ?></a>
+                                    </li>
+                                    <li class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.index' ? ' active' : ''); ?>">
+                                        <a href="" class="dash-link">
+                                            <?php echo e(__('Mis Amenidades')); ?>
+
+                                        </a>
                                     </li>
                                   
                                 </ul>

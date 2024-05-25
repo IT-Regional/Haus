@@ -1,8 +1,7 @@
-@extends('layouts.admin')
-@php
+<?php
 $profile = asset(Storage::url('uploads/avatar'));
-@endphp
-@push('script-page')
+?>
+<?php $__env->startPush('script-page'); ?>
     <script>
         $(document).on("click", ".status", function() {
             var status = $(this).attr('data-id');
@@ -31,11 +30,11 @@ $profile = asset(Storage::url('uploads/avatar'));
             var project_id = $(this).val();
 
             $.ajax({
-                url: '{{ route('project.getMilestone') }}',
+                url: '<?php echo e(route('project.getMilestone')); ?>',
                 type: 'POST',
                 data: {
                     "project_id": project_id,
-                    "_token": "{{ csrf_token() }}",
+                    "_token": "<?php echo e(csrf_token()); ?>",
                 },
                 success: function(data) {
                     $('#milestone_id').empty();
@@ -48,11 +47,11 @@ $profile = asset(Storage::url('uploads/avatar'));
             });
 
             $.ajax({
-                url: '{{ route('project.getUser') }}',
+                url: '<?php echo e(route('project.getUser')); ?>',
                 type: 'POST',
                 data: {
                     "project_id": project_id,
-                    "_token": "{{ csrf_token() }}",
+                    "_token": "<?php echo e(csrf_token()); ?>",
                 },
                 success: function(data) {
                     $('#assign_to').empty();
@@ -76,7 +75,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                 cache: false,
                 processData: false,
                 success: function(data) {
-                    toastrs('Success', '{{ __('File successfully uploaded.') }}', 'success');
+                    toastrs('Success', '<?php echo e(__('File successfully uploaded.')); ?>', 'success');
 
                     var html = '<div class="card mb-3 border shadow-none">\n' +
                         '                            <div class="px-3 py-3">\n' +
@@ -91,7 +90,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                         '                                        </p>\n' +
                         '                                    </div>\n' +
                         '                                    <div class="col-auto actions">\n' +
-                        '                                        <a download href="{{ asset(Storage::url('tasks')) }}' +
+                        '                                        <a download href="<?php echo e(asset(Storage::url('tasks'))); ?>' +
                         data.file + '" class="action-btn bg-info ms-2  btn btn-sm d-inline-flex align-items-center">\n' +
                         '                                            <i class="ti ti-download text-white"></i>\n' +
                         '                                        </a>\n' +
@@ -113,7 +112,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                         toastrs('Error', data.message, 'error');
                         $('#file-error').text(data.errors.file[0]).show();
                     } else {
-                        toastrs('Error', '{{ __('Some Thing Is Wrong!') }}', 'error');
+                        toastrs('Error', '<?php echo e(__('Some Thing Is Wrong!')); ?>', 'error');
                     }
                 }
             });
@@ -131,7 +130,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                     },
                     dataType: 'JSON',
                     success: function(data) {
-                        toastrs('Success', '{{ __('File successfully deleted.') }}', 'success');
+                        toastrs('Success', '<?php echo e(__('File successfully deleted.')); ?>', 'success');
                         div.remove();
                     },
                     error: function(data) {
@@ -139,66 +138,67 @@ $profile = asset(Storage::url('uploads/avatar'));
                         if (data.message) {
                             toastrs('Error', data.message, 'error');
                         } else {
-                            toastrs('Error', '{{ __('Some thing is wrong.') }}', 'error');
+                            toastrs('Error', '<?php echo e(__('Some thing is wrong.')); ?>', 'error');
                         }
                     }
                 });
             }
         });
     </script>
-@endpush
-@section('page-title')
-    {{ __('Task Calendar') }}
-@endsection
-@section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Task') }}</h5>
-    </div>
-@endsection
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Task Calendar') }}</li>
-@endsection
-@section('action-btn')
+<?php $__env->stopPush(); ?>
+<?php $__env->startSection('page-title'); ?>
+    <?php echo e(__('Task Calendar')); ?>
 
-    <a href="{{ route('project.all.task') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="List View" >
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?>
+    <div class="d-inline-block">
+        <h5 class="h4 d-inline-block font-weight-400 mb-0"><?php echo e(__('Task')); ?></h5>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
+    <li class="breadcrumb-item active" aria-current="page"><?php echo e(__('Task Calendar')); ?></li>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('action-btn'); ?>
+
+    <a href="<?php echo e(route('project.all.task')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="List View" >
         <i class="ti ti-list text-white"></i>
     </a>
     
-    <a href="{{ route('project.all.task.gantt.chart') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Gantt Chart') }}">
+    <a href="<?php echo e(route('project.all.task.gantt.chart')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="<?php echo e(__('Gantt Chart')); ?>">
         <i class="ti ti-chart-bar text-white"></i>
     </a>
 
-    <a href="{{ route('project.all.task.kanban') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Task Kanban') }}">
+    <a href="<?php echo e(route('project.all.task.kanban')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="<?php echo e(__('Task Kanban')); ?>">
         <i class="ti ti-layout-kanban text-white"></i>
     </a>
-    <a href="#" data-size="lg" data-url="{{ route('project.task.create', 0) }}" data-bs-toggle="modal" data-bs-whatever="{{__('Create New Task')}}"
-    data-bs-target="#exampleModal" title="{{ __('Create New Task') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
+    <a href="#" data-size="lg" data-url="<?php echo e(route('project.task.create', 0)); ?>" data-bs-toggle="modal" data-bs-whatever="<?php echo e(__('Create New Task')); ?>"
+    data-bs-target="#exampleModal" title="<?php echo e(__('Create New Task')); ?>" class="btn btn-sm btn-primary btn-icon m-1">
+        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="<?php echo e(__('Create')); ?>"></i>
     </a>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="row">
         <!-- [ sample-page ] start -->
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 style="width: 150px;">{{ __('Calendar') }}</h5>
-                    @if (
+                    <h5 style="width: 150px;"><?php echo e(__('Calendar')); ?></h5>
+                    <?php if(
                         !empty(App\Models\Utility::settings()['is_googleCal_enabled']) &&
-                            App\Models\Utility::settings()['is_googleCal_enabled'] == 'on')
+                            App\Models\Utility::settings()['is_googleCal_enabled'] == 'on'): ?>
                         <div class="form-group">
                             <label for=""></label>
                             <select class="form-control" name="calender_type" id="calender_type"
                                 style="float: right;width: 160px;margin-top: -30px;" onchange="get_data()">
-                                <option value="google_calender">{{ __('Google Calender') }}</option>
-                                <option value="local_calender" selected="true">{{ __('Local Calender') }}</option>
+                                <option value="google_calender"><?php echo e(__('Google Calender')); ?></option>
+                                <option value="local_calender" selected="true"><?php echo e(__('Local Calender')); ?></option>
                             </select>
-                            <input type="hidden" id="path_admin" value="{{ url('/') }}">
+                            <input type="hidden" id="path_admin" value="<?php echo e(url('/')); ?>">
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="card-body">
                     <div id='calendar' class='calendar local_calender'></div>
@@ -210,33 +210,33 @@ $profile = asset(Storage::url('uploads/avatar'));
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-4">{{ __('Next Task') }}</h4>
+                    <h4 class="mb-4"><?php echo e(__('Next Task')); ?></h4>
                     <ul class="event-cards list-group list-group-flush mt-3 w-100">
                     
-                        @foreach ($userTask as $event)
+                        <?php $__currentLoopData = $userTask; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li class="list-group-item card mb-3">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mb-3 mb-sm-0">
                                         <div class=" align-items-center">
                                             <div class="ms-3">
-                                                <h6 class="m-0">{{ $event->title }}</h6>
+                                                <h6 class="m-0"><?php echo e($event->title); ?></h6>
                                                 <small
-                                                    class="text-muted">{{ \Auth::user()->dateFormat($event->start_date) . ' ' . \Auth::user()->timeFormat($event->start_time) . ' ' . __('To') . ' ' . \Auth::user()->dateFormat($event->due_date) . ' ' . \Auth::user()->timeFormat($event->due_date) }}</small>
+                                                    class="text-muted"><?php echo e(\Auth::user()->dateFormat($event->start_date) . ' ' . \Auth::user()->timeFormat($event->start_time) . ' ' . __('To') . ' ' . \Auth::user()->dateFormat($event->due_date) . ' ' . \Auth::user()->timeFormat($event->due_date)); ?></small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('script-page')
+<?php $__env->startPush('script-page'); ?>
     
     <script type="text/javascript">
         $(document).ready(function() {
@@ -253,10 +253,10 @@ $profile = asset(Storage::url('uploads/avatar'));
                 }
             $.ajax({
                 // url: $("#path_admin").val() + "/event/get_event_data",
-                url: "{{ url('/') }}" + "/task/get_holiday_data",
+                url: "<?php echo e(url('/')); ?>" + "/task/get_holiday_data",
                 method: "POST",
                 data: {
-                    "_token": "{{ csrf_token() }}",
+                    "_token": "<?php echo e(csrf_token()); ?>",
                     'calender_type': calender_type
                 },
                 success: function(data) {
@@ -272,9 +272,9 @@ $profile = asset(Storage::url('uploads/avatar'));
                                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
                             },
                             buttonText: {
-                                timeGridDay: "{{ __('Day prueba') }}",
-                                timeGridWeek: "{{ __('Week') }}",
-                                dayGridMonth: "{{ __('Month') }}"
+                                timeGridDay: "<?php echo e(__('Day prueba')); ?>",
+                                timeGridWeek: "<?php echo e(__('Week')); ?>",
+                                dayGridMonth: "<?php echo e(__('Month')); ?>"
                             },
                             themeSystem: 'bootstrap',
                             slotDuration: '00:10:00',
@@ -294,4 +294,5 @@ $profile = asset(Storage::url('uploads/avatar'));
             });
         }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/project/taskcalendar.blade.php ENDPATH**/ ?>

@@ -42,6 +42,7 @@ class ReservasController extends Controller
         'amenidad_id' => $amenidad->id,
         'fecha_reserva' => $request->fecha_reserva,
     ]);
+    
 
     $amenidad->status = true;
     $amenidad->save();

@@ -11,41 +11,23 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body table-border-style">
-                    <div class="table-responsive">
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th><?php echo e(__('Nombre')); ?></th>
-                                    <th><?php echo e(__('Descripcion')); ?></th>
-                                    <th><?php echo e(__('Foto')); ?></th>
-                                    <th><?php echo e(__('Capacidad')); ?></th>
-                                    <th><?php echo e(__('Acciones')); ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
-                                        <td><?php echo e($amenidad->name); ?></td>
-                                        <td><?php echo e($amenidad->description); ?></td>
-                                        <td>
-                                            <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="50">
-                                        </td>
-                                        <td><?php echo e($amenidad->ability); ?></td>
-                                        <td>
-                                            
-                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </tbody>
-                        </table>
+        <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="col-md-4 col-sm-4">
+            <div class="card hover-shadow-lg">
+                    <div class="card-body user-card text-center client-box" style="height: 260px !important">
+                    <div class="avatar-parent-child">
+                        <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="200" class="avatar avatar-lg" height="100">
                     </div>
+                    <div class="h6 mt-4 mb-0">
+                        <?php echo e($amenidad->name); ?>
+
+                    </div>
+                    <br>
+                    <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar gg')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary">Reservar</a>
                 </div>
             </div>
         </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 <?php $__env->stopSection(); ?>
 

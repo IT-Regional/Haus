@@ -236,14 +236,19 @@
                                 <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu">
                                     <li
-                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        class="dash-item {{ Request::route()->getName() == 'amenidades.dashboard' ? ' active' : '' }}">
                                         <a class="dash-link"
                                             href="{{ route('amenidades.dashboard') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li
-                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
+                                        class="dash-item {{ Request::route()->getName() == 'amenidades.index' ? ' active' : '' }}">
                                         <a class="dash-link"
                                             href="{{route('reservas.index')}}">{{ __('Ver Amenidades') }}</a>
+                                    </li>
+                                    <li class="dash-item {{ Request::route()->getName() == 'amenidades.index' ? ' active' : '' }}">
+                                        <a href="" class="dash-link">
+                                            {{__('Mis Amenidades')}}
+                                        </a>
                                     </li>
                                   
                                 </ul>

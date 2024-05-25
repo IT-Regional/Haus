@@ -4,7 +4,7 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
+    <li class="breadcrumb-item"><a href="{{route('reservas.index')}}">{{__('Lista de amenidades')}}</a></li>
     <li class="breadcrumb-item">{{__('Reservar Amenidad')}}</li>
 @endsection
 
@@ -17,7 +17,6 @@
                     {{ Form::open(['route' => ['reservas.store', $amenidad_id->id]]) }}
                         {{ Form::hidden('amenidad_id', $amenidad_id->id) }}
                         <div class="form-group">
-                            {{Form::label('Foto Actual', __('Foto actual'), ['class' => 'form-label'])}}
                             <br>
                             <img src="{{ asset($amenidad_id->photo) }}" alt="Foto" width="500" class="form-label">
                         </div>

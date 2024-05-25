@@ -5,7 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb'); ?>
-    <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a></li>
+    <li class="breadcrumb-item"><a href="<?php echo e(route('reservas.index')); ?>"><?php echo e(__('Lista de amenidades')); ?></a></li>
     <li class="breadcrumb-item"><?php echo e(__('Reservar Amenidad')); ?></li>
 <?php $__env->stopSection(); ?>
 
@@ -20,8 +20,6 @@
                         <?php echo e(Form::hidden('amenidad_id', $amenidad_id->id)); ?>
 
                         <div class="form-group">
-                            <?php echo e(Form::label('Foto Actual', __('Foto actual'), ['class' => 'form-label'])); ?>
-
                             <br>
                             <img src="<?php echo e(asset($amenidad_id->photo)); ?>" alt="Foto" width="500" class="form-label">
                         </div>
