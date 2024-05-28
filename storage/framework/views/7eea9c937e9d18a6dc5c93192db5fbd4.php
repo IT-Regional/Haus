@@ -23,7 +23,7 @@
 
                     </div>
                     <br>
-                    <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar gg')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary">Reservar</a>
+                    <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary">Reservar</a>
                 </div>
             </div>
         </div>

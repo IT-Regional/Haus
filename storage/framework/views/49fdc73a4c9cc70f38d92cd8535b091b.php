@@ -32,7 +32,7 @@
                                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
                             },
                             buttonText: {
-                                timeGridDay: "<?php echo e(__('Day')); ?>",
+                                timeGridDay: "<?php echo e(__('Day pp')); ?>",
                                 timeGridWeek: "<?php echo e(__('Week')); ?>",
                                 dayGridMonth: "<?php echo e(__('Month')); ?>"
                             },

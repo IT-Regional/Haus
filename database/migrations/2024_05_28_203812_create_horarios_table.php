@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amenidades', function (Blueprint $table) {
+        Schema::create('horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('photo')->nullable();
-            $table->boolean('status')->default(false);
-            $table->text('description');
-            $table->integer('ability');
+            $table->foreignId('amenidad_id')->constrained('amenidades')->onDelete('cascade');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('amenidades');
+        Schema::dropIfExists('horarios');
     }
 };

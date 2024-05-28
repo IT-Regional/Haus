@@ -245,8 +245,8 @@
                                         <a class="dash-link"
                                             href="<?php echo e(route('reservas.index')); ?>"><?php echo e(__('Ver Amenidades')); ?></a>
                                     </li>
-                                    <li class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.index' ? ' active' : ''); ?>">
-                                        <a href="" class="dash-link">
+                                    <li class="dash-item <?php echo e(Request::route()->getName() == 'reservas.reservadas' ? ' active' : ''); ?>">
+                                        <a href="<?php echo e(route('reservas.reservadas')); ?>" class="dash-link">
                                             <?php echo e(__('Mis Amenidades')); ?>
 
                                         </a>

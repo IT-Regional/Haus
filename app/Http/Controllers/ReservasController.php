@@ -50,5 +50,12 @@ class ReservasController extends Controller
     return redirect()->route('reservas.index')->with('success', 'Amenidad reservada correctamente.');
 }
 
+public function reservadas(){
+
+    $user_id = Auth::id();
+    $reservas = Reserva::where('user_id', $user_id)->with('amenidad')->get();
+    return view('reservas.reservadas', compact('reservas'));
+}
+
 
 }

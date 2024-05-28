@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Amenidad;
+use App\Models\Horario;
 
 class AmenidadesController extends Controller
 {
@@ -37,6 +38,9 @@ class AmenidadesController extends Controller
             'status' => 'required|boolean',
             'description' => 'required',
             'ability' => 'required|integer',
+            'horarios' => 'required|array',
+            'horarios.*.start_time' => 'required|date_format:H:i',
+            'horarios.*.end_time' => 'required|date_format:H:i',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -50,7 +54,11 @@ class AmenidadesController extends Controller
             $validatedData['photo'] = $destinationPath . $fileName;
         }
 
-        Amenidad::create($validatedData);
+        $amenidad = Amenidad::create($validatedData);
+
+        foreach ($request->horarios as $horario) {
+            $amenidad->horarios()->create($horario);
+        }
 
         return redirect()->route('amenidades.index');
     }
@@ -69,6 +77,9 @@ class AmenidadesController extends Controller
             'status' => 'required|boolean',
             'description' => 'required',
             'ability' => 'required|integer',
+            'horarios' => 'required|array',
+            'horarios.*.start_time' => 'required|date_format:H:i',
+            'horarios.*.end_time' => 'required|date_format:H:i',
         ]);
 
         $amenidad = Amenidad::findOrFail($id);
@@ -87,6 +98,10 @@ class AmenidadesController extends Controller
         }
 
         $amenidad->update($validatedData);
+        $amenidad->horarios()->delete(); // Eliminar los horarios existentes
+        foreach ($request->horarios as $horario) {
+            $amenidad->horarios()->create($horario);
+        }
 
         return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reserva;
+use App\Models\Horario;
 
 class Amenidad extends Model
 {
@@ -20,5 +21,9 @@ class Amenidad extends Model
 
     public function reservas(){
         return $this->hasMany(Reserva::class);
+    }
+
+    public function horarios(){
+        return $this->hasMany(Horario::class);
     }
 }

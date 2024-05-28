@@ -111,6 +111,7 @@ use App\Http\Controllers\PaytrController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\XenditPaymentController;
 use App\Http\Controllers\YooKassaController;
+use App\Models\Reserva;
 
 /*
 |--------------------------------------------------------------------------
@@ -1924,4 +1925,5 @@ Route::resource('amenidades', AmenidadesController::class)->except(['show']);
 
 Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create'])->name('reservas.create');
 Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store');
+Route::get('reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
 Route::resource('reservas', ReservasController::class)->except(['create', 'show', 'store']);

@@ -33,7 +33,7 @@
                                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
                             },
                             buttonText: {
-                                timeGridDay: "{{ __('Day') }}",
+                                timeGridDay: "{{ __('Day pp') }}",
                                 timeGridWeek: "{{ __('Week') }}",
                                 dayGridMonth: "{{ __('Month') }}"
                             },
