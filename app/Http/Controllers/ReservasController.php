@@ -16,12 +16,6 @@ class ReservasController extends Controller
         return view('reservas.index', compact('amenidades'));
     }
 
-    /* public function create($amenidad_id)
-    {
-        $amenidad = Amenidad::findOrFail($amenidad_id);
-        return view('reservas.create', compact('amenidad'));
-    } */
-
     public function create($amenidad_id)
     {
         // Lógica para crear una reserva, utilizando el amenidad_id
@@ -54,6 +48,10 @@ public function reservadas(){
 
     $user_id = Auth::id();
     $reservas = Reserva::where('user_id', $user_id)->with('amenidad')->get();
+<<<<<<< HEAD
+=======
+
+>>>>>>> f7864a1d9c4c0a3b16f6c8111c84815b83b30d57
     return view('reservas.reservadas', compact('reservas'));
 }
 
