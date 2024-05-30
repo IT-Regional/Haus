@@ -17,7 +17,7 @@ class Reserva extends Model
         'end_time',
     ];
 
-    public function user()
+    /* public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -25,5 +25,15 @@ class Reserva extends Model
     public function amenidad()
     {
         return $this->belongsTo(Amenidad::class);
+    } */
+
+    public function amenidad()
+    {
+        return $this->belongsTo(Amenidad::class, 'amenidad_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -15,7 +15,10 @@
             data-bs-original-title="{{ __('Create New Lead') }}">
             <i data-bs-toggle="tooltip" title="{{ __('Crear Amenidad') }}" class="ti ti-plus text-white"></i>
         </a>
-        
+        <a href="{{route('amenidades.export')}}" class="btn btn-sm btn-primary btn-icon m-1" data-title="{{__('Export item CSV file')}}"
+         data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}">
+            <i class="ti ti-file-export"></i>
+        </a>
     </div>
 @endsection
 

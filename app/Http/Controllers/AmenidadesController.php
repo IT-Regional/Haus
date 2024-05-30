@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Amenidad;
 use App\Models\Horario;
 use App\Models\Reserva;
+use App\Exports\AmenidadReservadaExport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\Item;
-use App\Exports\ItemExport;
 
 class AmenidadesController extends Controller
 {
@@ -141,5 +140,10 @@ class AmenidadesController extends Controller
        $reservas = Reserva::with(['user', 'amenidad'])->get();
         return view('amenidades.reservas', compact('reservas'));
     }
+
+    public function export()
+{
+    return Excel::download(new AmenidadReservadaExport, 'amenidades_reservadas.xlsx');
+}
 
 }
