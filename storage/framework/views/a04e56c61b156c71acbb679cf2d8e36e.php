@@ -224,6 +224,9 @@
                                         <a class="dash-link"
                                             href="<?php echo e(route('amenidades.index')); ?>"><?php echo e(__('Crear Amenidad ')); ?></a>
                                     </li>
+                                    <li class="dash-item">
+                                        <a href="<?php echo e(route('amenidades.reservas')); ?>" class="dash-link"><?php echo e(__('Reservas')); ?></a>
+                                    </li>
                                   
                                 </ul>
                     </li>
@@ -236,16 +239,16 @@
                                 <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu">
                                     <li
-                                        class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.dashboard' ? ' active' : ''); ?>">
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
                                         <a class="dash-link"
                                             href="<?php echo e(route('amenidades.dashboard')); ?>"><?php echo e(__('Dashboard')); ?></a>
                                     </li>
                                     <li
-                                        class="dash-item <?php echo e(Request::route()->getName() == 'amenidades.index' ? ' active' : ''); ?>">
+                                        class="dash-item <?php echo e(Request::route()->getName() == 'project.dashboard' ? ' active' : ''); ?>">
                                         <a class="dash-link"
                                             href="<?php echo e(route('reservas.index')); ?>"><?php echo e(__('Ver Amenidades')); ?></a>
                                     </li>
-                                    <li class="dash-item <?php echo e(Request::route()->getName() == 'reservas.reservadas' ? ' active' : ''); ?>">
+									<li class="dash-item <?php echo e(Request::route()->getName() == 'reservas.reservadas' ? ' active' : ''); ?>">
                                         <a href="<?php echo e(route('reservas.reservadas')); ?>" class="dash-link">
                                             <?php echo e(__('Mis Amenidades')); ?>
 

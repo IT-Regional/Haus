@@ -15,6 +15,7 @@
             data-bs-original-title="{{ __('Create New Lead') }}">
             <i data-bs-toggle="tooltip" title="{{ __('Crear Amenidad') }}" class="ti ti-plus text-white"></i>
         </a>
+        
     </div>
 @endsection
 
@@ -46,6 +47,11 @@
                                         <td>{{ $amenidad->status ? __('Reservada') : __('Disponible') }}</td>
                                         <td>
                                             <a data-bs-toggle="tooltip" title="{{__('Editar')}}" href="{{ route('amenidades.edit', $amenidad->id) }}" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                            <form action="{{ route('amenidades.destroy', $amenidad->id) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta amenidad?');">{{ __('Eliminar') }}</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

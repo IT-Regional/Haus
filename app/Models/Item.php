@@ -121,7 +121,7 @@ class Item extends Model
         foreach($taxArr as $tax)
         {
             $tax = TaxRate::find($tax);
-            $taxes = $tax->name;
+            /* $taxes = $tax->name; */
         }
 
         return $taxes;

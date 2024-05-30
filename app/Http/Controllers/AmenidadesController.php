@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Amenidad;
 use App\Models\Horario;
+use App\Models\Reserva;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Item;
+use App\Exports\ItemExport;
 
 class AmenidadesController extends Controller
 {
@@ -106,11 +110,36 @@ class AmenidadesController extends Controller
         return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
     }
 
-    public function destroy($id){
+    /* public function destroy($id){
         $amenidad = Amenidad::findOrFail($id);
         $amenidad->delete();
 
         return redirect()->route('amenidades.index')->with('success', 'Amenidad eliminada correctamente.');
+    } */
+
+    public function destroy($id)
+    {
+        $amenidad = Amenidad::findOrFail($id);
+
+        // Elimina la foto asociada si existe
+        if ($amenidad->photo && file_exists(public_path($amenidad->photo))) {
+            unlink(public_path($amenidad->photo));
+        }
+
+        // Elimina los horarios asociados
+        $amenidad->horarios()->delete();
+
+        // Elimina la amenidad
+        $amenidad->delete();
+
+        return redirect()->route('amenidades.index')->with('success', 'Amenidad eliminada correctamente.');
+    }
+
+
+    public function reservas(){
+
+       $reservas = Reserva::with(['user', 'amenidad'])->get();
+        return view('amenidades.reservas', compact('reservas'));
     }
 
 }

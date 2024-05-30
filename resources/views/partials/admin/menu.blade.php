@@ -224,6 +224,9 @@
                                         <a class="dash-link"
                                             href="{{route('amenidades.index')}}">{{ __('Crear Amenidad ') }}</a>
                                     </li>
+                                    <li class="dash-item">
+                                        <a href="{{route('amenidades.reservas')}}" class="dash-link">{{__('Reservas')}}</a>
+                                    </li>
                                   
                                 </ul>
                     </li>
@@ -236,22 +239,17 @@
                                 <span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu">
                                     <li
-                                        class="dash-item {{ Request::route()->getName() == 'amenidades.dashboard' ? ' active' : '' }}">
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
                                         <a class="dash-link"
                                             href="{{ route('amenidades.dashboard') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li
-                                        class="dash-item {{ Request::route()->getName() == 'amenidades.index' ? ' active' : '' }}">
+                                        class="dash-item {{ Request::route()->getName() == 'project.dashboard' ? ' active' : '' }}">
                                         <a class="dash-link"
                                             href="{{route('reservas.index')}}">{{ __('Ver Amenidades') }}</a>
                                     </li>
-<<<<<<< HEAD
-                                    <li class="dash-item {{ Request::route()->getName() == 'reservas.reservadas' ? ' active' : '' }}">
+									<li class="dash-item {{ Request::route()->getName() == 'reservas.reservadas' ? ' active' : '' }}">
                                         <a href="{{ route('reservas.reservadas')}}" class="dash-link">
-=======
-                                    <li class="dash-item {{ Request::route()->getName() == 'amenidades.reservadas' ? ' active' : '' }}">
-                                        <a href="{{route('reservas.reservadas')}}" class="dash-link">
->>>>>>> f7864a1d9c4c0a3b16f6c8111c84815b83b30d57
                                             {{__('Mis Amenidades')}}
                                         </a>
                                     </li>

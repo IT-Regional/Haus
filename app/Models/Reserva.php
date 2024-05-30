@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Horario;
 
 class Reserva extends Model
 {
@@ -12,6 +13,8 @@ class Reserva extends Model
         'user_id',
         'amenidad_id',
         'fecha_reserva',
+        'start_time',
+        'end_time',
     ];
 
     public function user()

@@ -16,6 +16,7 @@
             data-bs-original-title="<?php echo e(__('Create New Lead')); ?>">
             <i data-bs-toggle="tooltip" title="<?php echo e(__('Crear Amenidad')); ?>" class="ti ti-plus text-white"></i>
         </a>
+        
     </div>
 <?php $__env->stopSection(); ?>
 
@@ -47,6 +48,11 @@
                                         <td><?php echo e($amenidad->status ? __('Reservada') : __('Disponible')); ?></td>
                                         <td>
                                             <a data-bs-toggle="tooltip" title="<?php echo e(__('Editar')); ?>" href="<?php echo e(route('amenidades.edit', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                            <form action="<?php echo e(route('amenidades.destroy', $amenidad->id)); ?>" method="POST" style="display: inline-block;">
+                                                <?php echo csrf_field(); ?>
+                                                <?php echo method_field('DELETE'); ?>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta amenidad?');"><?php echo e(__('Eliminar')); ?></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

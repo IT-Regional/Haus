@@ -1922,12 +1922,13 @@ Route::any('invoice-midtrans-status/', [MidtransController::class, 'getInvociePa
 
 Route::get('/amenidades/dashboard', [AmenidadesController::class, 'dashboard'])->name('amenidades.dashboard');
 Route::resource('amenidades', AmenidadesController::class)->except(['show']);
+Route::get('amenidades/reservas', [AmenidadesController::class, 'reservas'])->name('amenidades.reservas');
+Route::delete('amenidades/{id}', [AmenidadesController::class, 'destroy'])->name('amenidades.destroy');
 
 Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create'])->name('reservas.create');
 Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store');
-<<<<<<< HEAD
+
 Route::get('reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
-=======
-Route::get('/reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
->>>>>>> f7864a1d9c4c0a3b16f6c8111c84815b83b30d57
+
+
 Route::resource('reservas', ReservasController::class)->except(['create', 'show', 'store']);

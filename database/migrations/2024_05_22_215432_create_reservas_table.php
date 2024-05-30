@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('amenidad_id')->constrained('amenidades')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('fecha_reserva'); 
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
