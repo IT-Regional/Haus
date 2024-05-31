@@ -30,22 +30,26 @@
 
                         </div>
                         <div class="form-group">
-                            <?php echo e(Form::label('start_time', __('Hora de Inicio'), ['class' => 'col-form-label'])); ?>
-
-                            <select name="start_time" class="form-control" required>
+                            <label for="horarios" class="col-form-label"><?php echo e(__('Seleccione Horario')); ?></label>
+                            <div class="row">
                                 <?php $__currentLoopData = $horarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($horario->start_time); ?>"><?php echo e($horario->start_time); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <?php echo e(Form::label('end_time', __('Hora de Fin'), ['class' => 'col-form-label'])); ?>
+                                    <div class="col-md-4">
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center">
+                                                <label>
+                                                    <input type="radio" name="horario" value="<?php echo e($horario->start_time); ?>|<?php echo e($horario->end_time); ?>" required>
+                                                    <h5 class="card-title">
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->start_time)->format('h:i a')); ?> - 
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->end_time)->format('h:i a')); ?>
 
-                            <select name="end_time" class="form-control" required>
-                                <?php $__currentLoopData = $horarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($horario->end_time); ?>"><?php echo e($horario->end_time); ?></option>
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: <?php echo e($amenidad->ability); ?> Personas</p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a href="<?php echo e(route('reservas.index')); ?>" class="btn btn-light"><?php echo e(__('Cancelar')); ?></a>

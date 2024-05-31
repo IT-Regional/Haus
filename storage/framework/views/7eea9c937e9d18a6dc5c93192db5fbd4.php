@@ -14,7 +14,7 @@
         <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="col-md-4 col-sm-4">
             <div class="card hover-shadow-lg">
-                    <div class="card-body user-card text-center client-box" style="height: 260px !important">
+                <div class="card-body user-card text-center client-box" style="height: 260px !important">
                     <div class="avatar-parent-child">
                         <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="200" class="avatar avatar-lg" height="100">
                     </div>
@@ -23,7 +23,11 @@
 
                     </div>
                     <br>
-                    <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary">Reservar</a>
+                    <?php if($amenidad->status == 1): ?>
+                        <button class="btn btn-sm btn-secondary" disabled><?php echo e(__('Reservada')); ?></button>
+                    <?php else: ?>
+                        <a data-bs-toggle="tooltip" title="<?php echo e(__('Reservar')); ?>" href="<?php echo e(route('reservas.create', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><?php echo e(__('Reservar')); ?></a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

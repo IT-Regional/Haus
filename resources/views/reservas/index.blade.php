@@ -13,15 +13,19 @@
         @foreach ($amenidades as $amenidad)
         <div class="col-md-4 col-sm-4">
             <div class="card hover-shadow-lg">
-                    <div class="card-body user-card text-center client-box" style="height: 260px !important">
+                <div class="card-body user-card text-center client-box" style="height: 260px !important">
                     <div class="avatar-parent-child">
                         <img src="{{ asset($amenidad->photo) }}" alt="Foto" width="200" class="avatar avatar-lg" height="100">
                     </div>
                     <div class="h6 mt-4 mb-0">
-                        {{ $amenidad->name}}
+                        {{ $amenidad->name }}
                     </div>
                     <br>
-                    <a data-bs-toggle="tooltip" title="{{__('Reservar')}}" href="{{ route('reservas.create', $amenidad->id) }}" class="btn btn-sm btn-primary">Reservar</a>
+                    @if($amenidad->status == 1)
+                        <button class="btn btn-sm btn-secondary" disabled>{{ __('Reservada') }}</button>
+                    @else
+                        <a data-bs-toggle="tooltip" title="{{__('Reservar')}}" href="{{ route('reservas.create', $amenidad->id) }}" class="btn btn-sm btn-primary">{{ __('Reservar') }}</a>
+                    @endif
                 </div>
             </div>
         </div>

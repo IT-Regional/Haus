@@ -11,6 +11,10 @@
 
 <?php $__env->startSection('action-btn'); ?>
     <div class="float-end">
+        <a href="<?php echo e(route('amenidades.calendar')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
+            title="Calendar View">
+            <i class="ti ti-calendar text-white"></i>
+        </a>
         <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
             data-url="<?php echo e(route('amenidades.create')); ?>" data-bs-whatever="<?php echo e(__('Crear Amenidad')); ?>"
             data-bs-original-title="<?php echo e(__('Create New Lead')); ?>">

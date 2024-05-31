@@ -20,37 +20,37 @@ class ReservasController extends Controller
     public function create($amenidad_id)
     {
         // Lógica para crear una reserva, utilizando el amenidad_id
-        $amenidad = Amenidad::findOrFail($amenidad_id);
-        $horarios = $amenidad->horarios;
+        $amenidad = Amenidad::with('horarios')->findOrFail($amenidad_id);
+        $horarios = $amenidad->horarios; // Obtener horarios asociados a la amenidad
+
         return view('reservas.create', compact('amenidad', 'horarios'));
     }
-
-    public function store(Request $request, $amenidad_id)
+    
+ public function store(Request $request)
 {
-    $request->validate([
+    $validatedData = $request->validate([
+        'amenidad_id' => 'required|exists:amenidades,id',
         'fecha_reserva' => 'required|date',
-        'start_time' => 'required',
-        'end_time' => 'required',
+        'horario' => 'required|string',
     ]);
 
-    $amenidad = Amenidad::findOrFail($amenidad_id);
+    list($start_time, $end_time) = explode('|', $request->horario);
 
-    try {
-        Reserva::create([
-            'user_id' => Auth::id(),
-            'amenidad_id' => $amenidad->id,
-            'fecha_reserva' => $request->fecha_reserva,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-        ]);
+    // Crear la reserva
+    Reserva::create([
+        'amenidad_id' => $request->amenidad_id,
+        'user_id' => auth()->id(),
+        'fecha_reserva' => $request->fecha_reserva,
+        'start_time' => $start_time,
+        'end_time' => $end_time,
+    ]);
 
-        $amenidad->status = true;
-        $amenidad->save();
+    // Actualizar el estado de la amenidad
+    $amenidad = Amenidad::findOrFail($request->amenidad_id);
+    $amenidad->status = true; // O el valor adecuado para el estado de reservada
+    $amenidad->save();
 
-        return redirect()->route('reservas.index')->with('success', 'Amenidad reservada correctamente.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Error al reservar la amenidad: ' . $e->getMessage());
-    }
+    return redirect()->route('reservas.index')->with('success', 'Reserva creada exitosamente.');
 }
 
 public function reservadas(){

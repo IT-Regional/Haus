@@ -68,53 +68,45 @@ class AmenidadesController extends Controller
 
     public function edit($id){
 
-        $amenidad = Amenidad::findOrFail($id);
-        return view('amenidades.edit', compact('amenidad'));
+        $amenidad = Amenidad::with('horarios')->findOrFail($id);
+        $horarios = $amenidad->horarios; // Obtener horarios asociados a la amenidad
+        /* dd($horarios); */
+
+        return view('amenidades.edit', compact('amenidad', 'horarios'));
     }
 
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
-            'photo' => 'nullable|image',
-            'status' => 'required|boolean',
-            'description' => 'required',
+            'name' => 'required|string|max:255',
+            'status' => 'required|integer',
+            'description' => 'nullable|string',
             'ability' => 'required|integer',
-            'horarios' => 'required|array',
+            'photo' => 'nullable|image',
+            'horarios' => 'array',
             'horarios.*.start_time' => 'required|date_format:H:i',
-            'horarios.*.end_time' => 'required|date_format:H:i',
+            'horarios.*.end_time' => 'required|date_format:H:i|after:horarios.*.start_time',
         ]);
 
+        
+
         $amenidad = Amenidad::findOrFail($id);
+        $amenidad->update($validatedData);
 
         if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $destinationPath = 'images/amenidades/';
-            $fileName = time() . '-' . $file->getClientOriginalName();
-            $file->move($destinationPath, $fileName);
-            $validatedData['photo'] = $destinationPath . $fileName;
-
-            // Si se sube una nueva foto, elimina la anterior
-            if ($amenidad->photo && file_exists(public_path($amenidad->photo))) {
-                unlink(public_path($amenidad->photo));
-            }
+            $path = $request->file('photo')->store('amenidades', 'public');
+            $amenidad->photo = $path;
+            $amenidad->save();
         }
 
-        $amenidad->update($validatedData);
-        $amenidad->horarios()->delete(); // Eliminar los horarios existentes
+        // Actualizar horarios
+        $amenidad->horarios()->delete();
         foreach ($request->horarios as $horario) {
             $amenidad->horarios()->create($horario);
         }
 
         return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
     }
-
-    /* public function destroy($id){
-        $amenidad = Amenidad::findOrFail($id);
-        $amenidad->delete();
-
-        return redirect()->route('amenidades.index')->with('success', 'Amenidad eliminada correctamente.');
-    } */
 
     public function destroy($id)
     {
@@ -141,9 +133,35 @@ class AmenidadesController extends Controller
         return view('amenidades.reservas', compact('reservas'));
     }
 
-    public function export()
+    public function export(){
+        return Excel::download(new AmenidadReservadaExport, 'amenidades_reservadas.xlsx');
+    }
+
+    public function calendar(){
+
+        return view('amenidades.calendar');
+    }
+
+  /*   public function calendar()
 {
-    return Excel::download(new AmenidadReservadaExport, 'amenidades_reservadas.xlsx');
-}
+    
+    $reservas = Reserva::with(['user', 'amenidad'])->get();
+
+    
+    $arrReservas = [];
+    foreach ($reservas as $reserva) {
+        $arrReserva['id'] = $reserva->id;
+        $arrReserva['title'] = $reserva->amenidad->name . ' - ' . $reserva->user->name;
+        $arrReserva['start'] = $reserva->fecha_reserva . 'T' . $reserva->start_time;
+        $arrReserva['end'] = $reserva->fecha_reserva . 'T' . $reserva->end_time;
+        $arrReserva['className'] = 'event-blue';
+        $arrReservas[] = $arrReserva;
+    }
+
+    
+    $arrReservas = json_encode($arrReservas);
+
+    return view('amenidades.calendar', compact('arrReservas'));
+} */
 
 }

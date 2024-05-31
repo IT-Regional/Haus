@@ -25,20 +25,25 @@
                             {{ Form::date('fecha_reserva', \Carbon\Carbon::now(), ['class' => 'form-control', 'required' => 'required']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('start_time', __('Hora de Inicio'), ['class' => 'col-form-label']) }}
-                            <select name="start_time" class="form-control" required>
+                            <label for="horarios" class="col-form-label">{{ __('Seleccione Horario') }}</label>
+                            <div class="row">
                                 @foreach($horarios as $horario)
-                                    <option value="{{ $horario->start_time }}">{{ $horario->start_time }}</option>
+                                    <div class="col-md-4">
+                                        <div class="card mb-3">
+                                            <div class="card-body text-center">
+                                                <label>
+                                                    <input type="radio" name="horario" value="{{ $horario->start_time }}|{{ $horario->end_time }}" required>
+                                                    <h5 class="card-title">
+                                                        {{ \Carbon\Carbon::parse($horario->start_time)->format('h:i a') }} - 
+                                                        {{ \Carbon\Carbon::parse($horario->end_time)->format('h:i a') }}
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: {{ $amenidad->ability }} Personas</p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('end_time', __('Hora de Fin'), ['class' => 'col-form-label']) }}
-                            <select name="end_time" class="form-control" required>
-                                @foreach($horarios as $horario)
-                                    <option value="{{ $horario->end_time }}">{{ $horario->end_time }}</option>
-                                @endforeach
-                            </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a href="{{ route('reservas.index') }}" class="btn btn-light">{{ __('Cancelar') }}</a>

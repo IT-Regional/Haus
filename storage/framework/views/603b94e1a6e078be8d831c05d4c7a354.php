@@ -24,7 +24,7 @@
 
                         </div>
                         <div class="form-group">
-                             <?php echo e(Form::label('status', __('Estado'), ['class' => 'col-form-label'])); ?>
+                            <?php echo e(Form::label('status', __('Estado'), ['class' => 'col-form-label'])); ?>
 
                             <?php echo e(Form::select('status', [0 => 'No Reservada', 1 => 'Reservada'], null, ['class' => 'form-control', 'required' => 'required'])); ?>
 
@@ -53,6 +53,32 @@
                             <?php echo e(Form::number('ability', null, ['class' => 'form-control', 'placeholder' => __('Ingrese la capacidad')])); ?>
 
                         </div>
+                        <div class="form-group">
+                            <?php echo e(Form::label('horarios', __('Horarios'), ['class' => 'form-label'])); ?>
+
+                            <div id="horarios-container">
+                                <?php $__currentLoopData = $horarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="row horario-row">
+                                        <div class="col-md-5">
+                                            <?php echo e(Form::label("horarios[$index][start_time]", __('Hora de Inicio'), ['class' => 'form-label'])); ?>
+
+                                            <?php echo e(Form::time("horarios[$index][start_time]", $horario->start_time, ['class' => 'form-control', 'required' => 'required'])); ?>
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <?php echo e(Form::label("horarios[$index][end_time]", __('Hora de Fin'), ['class' => 'form-label'])); ?>
+
+                                            <?php echo e(Form::time("horarios[$index][end_time]", $horario->end_time, ['class' => 'form-control', 'required' => 'required'])); ?>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger remove-horario"><?php echo e(__('Eliminar')); ?></button>
+                                        </div>
+                                    </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="add-horario"><?php echo e(__('Agregar Horario')); ?></button>
+                        </div>
                         <button type="submit" class="btn btn-primary"><?php echo e(__('Actualizar')); ?></button>
                     <?php echo e(Form::close()); ?>
 
@@ -60,5 +86,37 @@
             </div>
         </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('add-horario').addEventListener('click', function () {
+            const container = document.getElementById('horarios-container');
+            const index = container.querySelectorAll('.horario-row').length;
+            const row = document.createElement('div');
+            row.classList.add('row', 'horario-row');
+            row.innerHTML = `
+                <div class="col-md-5">
+                    <label class="form-label"><?php echo e(__('Hora de Inicio')); ?></label>
+                    <input type="time" name="horarios[${index}][start_time]" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label"><?php echo e(__('Hora de Fin')); ?></label>
+                    <input type="time" name="horarios[${index}][end_time]" class="form-control" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger remove-horario"><?php echo e(__('Eliminar')); ?></button>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+
+        document.getElementById('horarios-container').addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-horario')) {
+                e.target.closest('.horario-row').remove();
+            }
+        });
+    });
+</script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/amenidades/edit.blade.php ENDPATH**/ ?>
