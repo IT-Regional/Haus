@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="horarios" class="col-form-label"><?php echo e(__('Seleccione Horario')); ?></label>
                             <div class="row">
-                                <?php $__currentLoopData = $horarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $horariosDisponibles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-md-4">
                                         <div class="card mb-3">
                                             <div class="card-body text-center">
@@ -63,5 +63,6 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/reservas/create.blade.php ENDPATH**/ ?>
