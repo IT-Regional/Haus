@@ -137,31 +137,32 @@ class AmenidadesController extends Controller
         return Excel::download(new AmenidadReservadaExport, 'amenidades_reservadas.xlsx');
     }
 
-    public function calendar(){
+    /* public function calendar(){
 
         return view('amenidades.calendar');
+    } */
+
+    public function calendar()
+    {
+        
+        $reservas = Reserva::with(['user', 'amenidad'])->get();
+
+        
+        $arrReservas = [];
+        foreach ($reservas as $reserva) {
+            $arrReserva['id'] = $reserva->id;
+            $arrReserva['title'] = $reserva->amenidad->name . ' - ' . $reserva->user->name;
+            $arrReserva['start'] = $reserva->fecha_reserva . 'T' . $reserva->start_time;
+            $arrReserva['end'] = $reserva->fecha_reserva . 'T' . $reserva->end_time;
+            $arrReserva['className'] = 'event-blue';
+            $arrReservas[] = $arrReserva;
+        }
+
+        
+        $arrReservas = json_encode($arrReservas);
+        /* dd($arrReservas); */
+
+        return view('amenidades.calendar', compact('arrReservas'));
     }
-
-  /*   public function calendar()
-{
-    
-    $reservas = Reserva::with(['user', 'amenidad'])->get();
-
-    
-    $arrReservas = [];
-    foreach ($reservas as $reserva) {
-        $arrReserva['id'] = $reserva->id;
-        $arrReserva['title'] = $reserva->amenidad->name . ' - ' . $reserva->user->name;
-        $arrReserva['start'] = $reserva->fecha_reserva . 'T' . $reserva->start_time;
-        $arrReserva['end'] = $reserva->fecha_reserva . 'T' . $reserva->end_time;
-        $arrReserva['className'] = 'event-blue';
-        $arrReservas[] = $arrReserva;
-    }
-
-    
-    $arrReservas = json_encode($arrReservas);
-
-    return view('amenidades.calendar', compact('arrReservas'));
-} */
 
 }
