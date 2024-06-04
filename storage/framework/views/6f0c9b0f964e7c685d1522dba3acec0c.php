@@ -34,6 +34,18 @@
                 <?php echo e(Form::number('ability', null, ['class' => 'form-control', 'placeholder' => __('Ingrese la capacidad')])); ?>
 
             </div>
+            <div class="form-group">
+                <?php echo e(Form::label('is_paid', __('¿Es de pago?'), ['class' => 'form-label'])); ?>
+
+                <?php echo e(Form::checkbox('is_paid', true, false, ['id' => 'is_paid'])); ?>
+
+            </div>
+            <div class="form-group" id="cost_field" style="display:none;">
+                <?php echo e(Form::label('cost', __('Costo'), ['class' => 'form-label'])); ?>
+
+                <?php echo e(Form::number('cost', null, ['class' => 'form-control', 'step' => '0.01'])); ?>
+
+            </div>
             <div class="col-md-12">
                 <label><?php echo e(__('Horarios')); ?></label>
                 <div id="horarios-wrapper">
@@ -62,7 +74,7 @@
 </form>
 
 <script>
-    document.getElementById('add-horario').addEventListener('click', function () {
+    document.getElementById('add-horario').addEventListener('click', function() {
         var wrapper = document.getElementById('horarios-wrapper');
         var index = wrapper.children.length;
         var newHorario = document.createElement('div');
@@ -78,6 +90,9 @@
             </div>
         `;
         wrapper.appendChild(newHorario);
+    });
+    document.getElementById('is_paid').addEventListener('change', function() {
+        document.getElementById('cost_field').style.display = this.checked ? 'block' : 'none';
     });
 </script>
 <?php /**PATH C:\xampp\htdocs\main-file\main-file\resources\views/amenidades/create.blade.php ENDPATH**/ ?>

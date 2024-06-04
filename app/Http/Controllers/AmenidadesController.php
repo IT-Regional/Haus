@@ -41,10 +41,14 @@ class AmenidadesController extends Controller
             'status' => 'required|boolean',
             'description' => 'required',
             'ability' => 'required|integer',
+            'is_paid' => 'sometimes|boolean',
+            'cost' => 'nullable|required_if:is_paid,true|numeric|min:0',
             'horarios' => 'required|array',
             'horarios.*.start_time' => 'required|date_format:H:i',
             'horarios.*.end_time' => 'required|date_format:H:i',
         ]);
+
+        $validatedData['is_paid'] = $request->has('is_paid');
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -82,13 +86,15 @@ class AmenidadesController extends Controller
             'status' => 'required|integer',
             'description' => 'nullable|string',
             'ability' => 'required|integer',
+            'is_paid' => 'sometimes|boolean',
+            'cost' => 'nullable|required_if:is_paid,true|numeric|min:0',
             'photo' => 'nullable|image',
             'horarios' => 'array',
             'horarios.*.start_time' => 'required|date_format:H:i',
             'horarios.*.end_time' => 'required|date_format:H:i|after:horarios.*.start_time',
         ]);
-
         
+        $validatedData['is_paid'] = $request->has('is_paid');
 
         $amenidad = Amenidad::findOrFail($id);
         $amenidad->update($validatedData);

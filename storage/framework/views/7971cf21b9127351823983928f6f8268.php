@@ -30,22 +30,47 @@
 
                     </div>
                     <div class="form-group">
+                        <p><?php echo e(__('Costo:')); ?>
+
+                            <?php echo e($amenidad->is_paid ? 'De pago - $' . number_format($amenidad->cost, 2) : 'Gratis'); ?></p>
+                    </div>
+                    <div class="form-group">
                         <label for="horarios" class="col-form-label"><?php echo e(__('Seleccione Horario')); ?></label>
                         <div class="row">
                             <?php $__currentLoopData = $horariosDisponibles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $horario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col-md-4">
                                     <div class="card mb-3">
                                         <div class="card-body text-center">
-                                            <label>
-                                                <input type="radio" name="horario"
-                                                    value="<?php echo e($horario->start_time); ?>|<?php echo e($horario->end_time); ?>" required>
-                                                <h5 class="card-title">
-                                                    <?php echo e(\Carbon\Carbon::parse($horario->start_time)->format('h:i a')); ?> -
-                                                    <?php echo e(\Carbon\Carbon::parse($horario->end_time)->format('h:i a')); ?>
+                                            <?php if($horario->disponible): ?>
+                                                <label>
+                                                    <input type="radio" name="horario"
+                                                        value="<?php echo e($horario->start_time); ?>|<?php echo e($horario->end_time); ?>"
+                                                        required>
+                                                    <h5 class="card-title">
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->start_time)->format('h:i a')); ?>
 
-                                                </h5>
-                                                <p class="card-text">Capacidad: <?php echo e($amenidad->ability); ?> Personas</p>
-                                            </label>
+                                                        -
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->end_time)->format('h:i a')); ?>
+
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: <?php echo e($amenidad->ability); ?> Personas</p>
+                                                </label>
+                                            <?php else: ?>
+                                                <label class="text-muted">
+                                                    <input type="radio" name="horario"
+                                                        value="<?php echo e($horario->start_time); ?>|<?php echo e($horario->end_time); ?>"
+                                                        disabled>
+                                                    <h5 class="card-title">
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->start_time)->format('h:i a')); ?>
+
+                                                        -
+                                                        <?php echo e(\Carbon\Carbon::parse($horario->end_time)->format('h:i a')); ?>
+
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: <?php echo e($amenidad->ability); ?> Personas</p>
+                                                    <p class="text-danger"><?php echo e(__('Reservado')); ?></p>
+                                                </label>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

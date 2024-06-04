@@ -25,21 +25,42 @@
                         {{ Form::date('fecha_reserva', $fechaSeleccionada, ['class' => 'form-control', 'required' => 'required', 'id' => 'fecha_reserva']) }}
                     </div>
                     <div class="form-group">
+                        <p>{{ __('Costo:') }}
+                            {{ $amenidad->is_paid ? 'De pago - $' . number_format($amenidad->cost, 2) : 'Gratis' }}</p>
+                    </div>
+                    <div class="form-group">
                         <label for="horarios" class="col-form-label">{{ __('Seleccione Horario') }}</label>
                         <div class="row">
                             @foreach ($horariosDisponibles as $horario)
                                 <div class="col-md-4">
                                     <div class="card mb-3">
                                         <div class="card-body text-center">
-                                            <label>
-                                                <input type="radio" name="horario"
-                                                    value="{{ $horario->start_time }}|{{ $horario->end_time }}" required>
-                                                <h5 class="card-title">
-                                                    {{ \Carbon\Carbon::parse($horario->start_time)->format('h:i a') }} -
-                                                    {{ \Carbon\Carbon::parse($horario->end_time)->format('h:i a') }}
-                                                </h5>
-                                                <p class="card-text">Capacidad: {{ $amenidad->ability }} Personas</p>
-                                            </label>
+                                            @if ($horario->disponible)
+                                                <label>
+                                                    <input type="radio" name="horario"
+                                                        value="{{ $horario->start_time }}|{{ $horario->end_time }}"
+                                                        required>
+                                                    <h5 class="card-title">
+                                                        {{ \Carbon\Carbon::parse($horario->start_time)->format('h:i a') }}
+                                                        -
+                                                        {{ \Carbon\Carbon::parse($horario->end_time)->format('h:i a') }}
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: {{ $amenidad->ability }} Personas</p>
+                                                </label>
+                                            @else
+                                                <label class="text-muted">
+                                                    <input type="radio" name="horario"
+                                                        value="{{ $horario->start_time }}|{{ $horario->end_time }}"
+                                                        disabled>
+                                                    <h5 class="card-title">
+                                                        {{ \Carbon\Carbon::parse($horario->start_time)->format('h:i a') }}
+                                                        -
+                                                        {{ \Carbon\Carbon::parse($horario->end_time)->format('h:i a') }}
+                                                    </h5>
+                                                    <p class="card-text">Capacidad: {{ $amenidad->ability }} Personas</p>
+                                                    <p class="text-danger">{{ __('Reservado') }}</p>
+                                                </label>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

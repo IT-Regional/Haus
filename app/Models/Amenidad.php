@@ -17,6 +17,8 @@ class Amenidad extends Model
         'status',
         'description',
         'ability',
+        'is_paid',
+        'cost',
     ];
 
     public function reservas(){

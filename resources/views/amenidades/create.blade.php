@@ -24,6 +24,14 @@
                 {{ Form::label('ability', __('Capacidad'), ['class' => 'form-label']) }}
                 {{ Form::number('ability', null, ['class' => 'form-control', 'placeholder' => __('Ingrese la capacidad')]) }}
             </div>
+            <div class="form-group">
+                {{ Form::label('is_paid', __('¿Es de pago?'), ['class' => 'form-label']) }}
+                {{ Form::checkbox('is_paid', true, false, ['id' => 'is_paid']) }}
+            </div>
+            <div class="form-group" id="cost_field" style="display:none;">
+                {{ Form::label('cost', __('Costo'), ['class' => 'form-label']) }}
+                {{ Form::number('cost', null, ['class' => 'form-control', 'step' => '0.01']) }}
+            </div>
             <div class="col-md-12">
                 <label>{{ __('Horarios') }}</label>
                 <div id="horarios-wrapper">
@@ -48,7 +56,7 @@
 </form>
 
 <script>
-    document.getElementById('add-horario').addEventListener('click', function () {
+    document.getElementById('add-horario').addEventListener('click', function() {
         var wrapper = document.getElementById('horarios-wrapper');
         var index = wrapper.children.length;
         var newHorario = document.createElement('div');
@@ -64,5 +72,8 @@
             </div>
         `;
         wrapper.appendChild(newHorario);
+    });
+    document.getElementById('is_paid').addEventListener('change', function() {
+        document.getElementById('cost_field').style.display = this.checked ? 'block' : 'none';
     });
 </script>

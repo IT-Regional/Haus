@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('ability');
             $table->time('start_time');
             $table->time('end_time');
+            $table->boolean('is_paid');
+            $table->decimal('cost',8,2)->nullable();
             $table->timestamps();
         });
     }
