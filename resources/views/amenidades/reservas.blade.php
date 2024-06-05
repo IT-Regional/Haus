@@ -19,10 +19,10 @@
                                 <tr>
                                     <th>{{__('Nombre')}}</th>
                                     <th>{{__('Descripcion')}}</th>
-                                    <th>{{__('Foto')}}</th>
                                     <th>{{__('Fecha de reserva')}}</th>
                                     <th>{{__('Hora de inicio')}}</th>
                                     <th>{{__('Hora de fin')}}</th>
+                                    <th>{{__('Foto')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

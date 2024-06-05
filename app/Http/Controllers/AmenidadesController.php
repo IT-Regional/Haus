@@ -8,6 +8,7 @@ use App\Models\Horario;
 use App\Models\Reserva;
 use App\Exports\AmenidadReservadaExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class AmenidadesController extends Controller
 {
@@ -63,9 +64,11 @@ class AmenidadesController extends Controller
 
         $amenidad = Amenidad::create($validatedData);
 
-        foreach ($request->horarios as $horario) {
-            $amenidad->horarios()->create($horario);
-        }
+       foreach ($request->horarios as $horario) {
+    $horario['start_time'] = Carbon::createFromFormat('H:i', $horario['start_time']);
+    $horario['end_time'] = Carbon::createFromFormat('H:i', $horario['end_time']);
+    $amenidad->horarios()->create($horario);
+}
 
         return redirect()->route('amenidades.index');
     }
@@ -74,13 +77,49 @@ class AmenidadesController extends Controller
 
         $amenidad = Amenidad::with('horarios')->findOrFail($id);
         $horarios = $amenidad->horarios; // Obtener horarios asociados a la amenidad
-        /* dd($horarios); */
 
         return view('amenidades.edit', compact('amenidad', 'horarios'));
     }
 
-    public function update(Request $request, $id)
+    /* public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|integer',
+            'description' => 'nullable|string',
+            'ability' => 'required|integer',
+            'is_paid' => 'sometimes|boolean',
+            'cost' => 'nullable|required_if:is_paid,true|numeric|min:0',
+            'photo' => 'nullable|image',
+            'horarios' => 'array',
+            'horarios.*.start_time' => 'required|date_format:H:i',
+            'horarios.*.end_time' => 'required|date_format:H:i|after:horarios.*.start_time',
+        ]);
+        
+        $validatedData['is_paid'] = $request->has('is_paid');
+
+        $amenidad = Amenidad::findOrFail($id);
+        dd('Encontrada');
+        $amenidad->update($validatedData);
+        
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('amenidades', 'public');
+            $amenidad->photo = $path;
+            $amenidad->save();
+        }
+
+        // Actualizar horarios
+        $amenidad->horarios()->delete();
+        foreach ($request->horarios as $horario) {
+            $amenidad->horarios()->create($horario);
+        }
+        return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
+    } */
+
+    /* public function update(Request $request, $id)
+{
+    try {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'status' => 'required|integer',
@@ -112,7 +151,51 @@ class AmenidadesController extends Controller
         }
 
         return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error al actualizar la amenidad: ' . $e->getMessage());
     }
+} */
+
+public function update(Request $request, $id)
+{
+    try {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required|integer',
+            'description' => 'nullable|string',
+            'ability' => 'required|integer',
+            'is_paid' => 'sometimes|boolean',
+            'cost' => 'nullable|required_if:is_paid,true|numeric|min:0',
+            'photo' => 'nullable|image',
+            'horarios' => 'array',
+            'horarios.*.start_time' => 'required|date_format:H:i',
+            'horarios.*.end_time' => 'required|date_format:H:i|after:horarios.*.start_time',
+        ]);
+        
+        $validatedData['is_paid'] = $request->has('is_paid');
+
+        $amenidad = Amenidad::findOrFail($id);
+        $amenidad->update($validatedData);
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('amenidades', 'public');
+            $amenidad->photo = $path;
+            $amenidad->save();
+        }
+
+        // Actualizar horarios
+        $amenidad->horarios()->delete();
+        foreach ($request->horarios as $horario) {
+            $amenidad->horarios()->create($horario);
+        }
+
+        return redirect()->route('amenidades.index')->with('success', 'Amenidad actualizada correctamente.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error al actualizar la amenidad: ' . $e->getMessage());
+    }
+}
+
+
 
     public function destroy($id)
     {

@@ -1,4 +1,5 @@
 
+
 <?php $__env->startSection('page-title'); ?>
     <?php echo e(__('Reservar Amenidad')); ?>
 
@@ -15,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo e(__('Reservar Amenidad:')); ?> <?php echo e($amenidad->name); ?></h4>
-                    <?php echo e(Form::open(['route' => ['reservas.store', $amenidad->id]])); ?>
+                    <?php echo e(Form::open(['route' => 'reservas.store'])); ?>
 
                     <?php echo e(Form::hidden('amenidad_id', $amenidad->id)); ?>
 

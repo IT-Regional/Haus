@@ -6,7 +6,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
     <li class="breadcrumb-item"><a href="{{ route('amenidades.index') }}">{{ __('Lista de Amenidades') }}</a></li>
-    <li class="breadcrumb-item">{{ __('Editar Amenidad') }}</li>
+    <li class="breadcrumb-item">{{ __('Editar Amenidad admin') }}</li>
 @endsection
 
 @section('content')
@@ -57,11 +57,11 @@
                                 <div class="row horario-row">
                                     <div class="col-md-5">
                                         {{ Form::label("horarios[$index][start_time]", __('Hora de Inicio'), ['class' => 'form-label']) }}
-                                        {{ Form::time("horarios[$index][start_time]", $horario->start_time, ['class' => 'form-control', 'required' => 'required']) }}
+                                        {{ Form::time("horarios[$index]['start_time']", $horario->start_time, ['class' => 'form-control', 'required' => 'required']) }}
                                     </div>
                                     <div class="col-md-5">
                                         {{ Form::label("horarios[$index][end_time]", __('Hora de Fin'), ['class' => 'form-label']) }}
-                                        {{ Form::time("horarios[$index][end_time]", $horario->end_time, ['class' => 'form-control', 'required' => 'required']) }}
+                                        {{ Form::time("horarios[$index]['end_time']", $horario->end_time, ['class' => 'form-control', 'required' => 'required']) }}
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button"

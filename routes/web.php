@@ -1928,8 +1928,8 @@ Route::get('/amennidades/export', [AmenidadesController::class, 'export'])->name
 Route::get('amenidades/calendar', [AmenidadesController::class, 'calendar'])->name('amenidades.calendar');
 
 Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create'])->name('reservas.create');
-Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store');
-
+/* Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store'); */
+Route::post('reservas', [ReservasController::class, 'store'])->name('reservas.store');
 Route::get('reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
 
 

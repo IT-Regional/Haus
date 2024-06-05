@@ -17,6 +17,8 @@ class Amenidad extends Model
         'status',
         'description',
         'ability',
+        'start_time',
+        'end_time', 
         'is_paid',
         'cost',
     ];

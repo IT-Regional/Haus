@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('page-title')
     {{ __('Reservar Amenidad') }}
 @endsection
@@ -14,7 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{ __('Reservar Amenidad:') }} {{ $amenidad->name }}</h4>
-                    {{ Form::open(['route' => ['reservas.store', $amenidad->id]]) }}
+                    {{ Form::open(['route' => 'reservas.store']) }}
                     {{ Form::hidden('amenidad_id', $amenidad->id) }}
                     <div class="form-group">
                         <br>
