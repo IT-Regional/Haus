@@ -26,7 +26,7 @@
                 handleWindowResize: true,
                 height: 'auto',
                 timeFormat: 'H(:mm)',
-                events: @json($arrReservas) // Aquí se pasan los eventos desde el controlador
+                events: @json($arrReservas)
             });
             calendar.render();
         });
@@ -47,7 +47,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ __('Calendar') }}</h5>
+                    <h5>{{ __('Calendario') }}</h5>
                 </div>
                 <div class="card-body">
                     <div id='calendar' class='calendar local_calender'></div>

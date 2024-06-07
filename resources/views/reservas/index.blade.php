@@ -8,6 +8,15 @@
     <li class="breadcrumb-item">{{ __('Reservar Amenidad') }}</li>
 @endsection
 
+@section('action-btn')
+    <div class="float-end">
+        <a href="{{ route('amenidades.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
+            title="Calendar View">
+            <i class="ti ti-calendar text-white"></i>
+        </a>
+    </div>
+@endsection
+
 @section('content')
     <div class="row">
         @foreach ($amenidades as $amenidad)

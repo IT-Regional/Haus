@@ -9,6 +9,15 @@
     <li class="breadcrumb-item"><?php echo e(__('Reservar Amenidad')); ?></li>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('action-btn'); ?>
+    <div class="float-end">
+        <a href="<?php echo e(route('amenidades.calendar')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
+            title="Calendar View">
+            <i class="ti ti-calendar text-white"></i>
+        </a>
+    </div>
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

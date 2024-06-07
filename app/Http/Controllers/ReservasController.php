@@ -48,57 +48,6 @@ class ReservasController extends Controller
         return view('reservas.create', compact('amenidad', 'horariosDisponibles', 'fechaSeleccionada'));
     }
 
-    /* public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'amenidad_id' => 'required|exists:amenidades,id',
-            'fecha_reserva' => 'required|date',
-            'horario' => 'required|string',
-        ]);
-
-        list($start_time, $end_time) = explode('|', $request->horario);
-
-        // Verificar si el horario ya está reservado
-        $existingReservation = Reserva::where('amenidad_id', $request->amenidad_id)
-            ->where('fecha_reserva', $request->fecha_reserva)
-            ->where(function($query) use ($start_time, $end_time) {
-                $query->whereBetween('start_time', [$start_time, $end_time])
-                      ->orWhereBetween('end_time', [$start_time, $end_time])
-                      ->orWhere(function($query) use ($start_time, $end_time) {
-                          $query->where('start_time', '<', $start_time)
-                                ->where('end_time', '>', $end_time);
-                      });
-            })
-            ->exists();
-
-        if ($existingReservation) {
-            return redirect()->back()->withErrors(['El horario ya está reservado.']);
-        }
-
-        // Crear la reserva
-        Reserva::create([
-            'amenidad_id' => $request->amenidad_id,
-            'user_id' => auth()->id(),
-            'fecha_reserva' => $request->fecha_reserva,
-            'start_time' => $start_time,
-            'end_time' => $end_time,
-        ]);
-
-        // Obtener la amenidad y sus horarios reservados
-        $amenidad = Amenidad::find($request->amenidad_id);
-        $totalHorarios = $amenidad->horarios()->count();
-        $reservados = Reserva::where('amenidad_id', $request->amenidad_id)
-                            ->where('fecha_reserva', $request->fecha_reserva)
-                            ->count();
-
-        // Verificar si todos los horarios están reservados
-        if ($totalHorarios == $reservados) {
-            $amenidad->status = true;
-            $amenidad->save();
-        }
-
-        return redirect()->route('reservas.index')->with('success', 'Reserva creada exitosamente.');
-    } */
 
     public function store(Request $request)
 {
@@ -147,6 +96,31 @@ class ReservasController extends Controller
         $reservas = Reserva::where('user_id', $user_id)->with('amenidad')->get();
         return view('reservas.reservadas', compact('reservas'));
     }
+
+    public function verifyPayment(Request $request)
+    {
+        $validatedData = $request->validate([
+            'amenidad_id' => 'required|exists:amenidades,id',
+            'fecha_reserva' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+        ]);
+
+        $amenidad = Amenidad::findOrFail($validatedData['amenidad_id']);
+
+        // Verifica si la amenidad es de pago
+        if (!$amenidad->is_paid) {
+            return redirect()->route('reservas.create', $amenidad->id)->with('error', 'Esta amenidad no requiere pago.');
+        }
+
+        return view('reservas.verify_payment', [
+            'amenidad' => $amenidad,
+            'fecha_reserva' => $validatedData['fecha_reserva'],
+            'start_time' => $validatedData['start_time'],
+            'end_time' => $validatedData['end_time'],
+        ]);
+    }
+
 
 
 }

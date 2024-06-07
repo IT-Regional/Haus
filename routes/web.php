@@ -1931,6 +1931,7 @@ Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create
 /* Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store'); */
 Route::post('reservas', [ReservasController::class, 'store'])->name('reservas.store');
 Route::get('reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
-
+Route::get('reservas{id}', [AmenidadesController::class, 'show'])->name('amenidades.show');
+Route::get('reservas/verify-payment', [ReservasController::class, 'verifyPayment'])->name('reservas.verify_payment');
 
 Route::resource('reservas', ReservasController::class)->except(['create', 'show', 'store']);

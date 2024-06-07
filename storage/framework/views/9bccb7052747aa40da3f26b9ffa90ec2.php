@@ -35,7 +35,8 @@
                                             <img src="<?php echo e(asset($reserva->amenidad->photo)); ?>" alt="Foto" width="50">
                                         </td>
                                         <td>
-                                            <a href="<?php echo e(route('reservas.show', $reserva->id)); ?>" class="btn btn-info"><?php echo e(__('Detalle')); ?></a>
+                                            <a href="<?php echo e(route('amenidades.show', $reserva->id)); ?>"
+                                                class="btn btn-info"><?php echo e(__('Detalle')); ?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -47,4 +48,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\resources\views/amenidades/reservas.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\main-file\resources\views/amenidades/reservas.blade.php ENDPATH**/ ?>

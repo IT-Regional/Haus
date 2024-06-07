@@ -59,8 +59,7 @@
                         <?php echo e(Form::checkbox('is_paid', true, $amenidad->is_paid, ['id' => 'is_paid'])); ?>
 
                     </div>
-                    <div class="form-group" id="cost_field"
-                        style="<?php echo e($amenidad->is_paid ? 'display:block;' : 'display:none;'); ?>">
+                    <div class="form-group" id="cost_field" style="<?php echo e($amenidad->is_paid ? 'display:block;' : 'display:none;'); ?>">
                         <?php echo e(Form::label('cost', __('Costo'), ['class' => 'form-label'])); ?>
 
                         <?php echo e(Form::number('cost', $amenidad->cost, ['class' => 'form-control', 'step' => '0.01'])); ?>
@@ -76,24 +75,22 @@
                                     <div class="col-md-5">
                                         <?php echo e(Form::label("horarios[$index][start_time]", __('Hora de Inicio'), ['class' => 'form-label'])); ?>
 
-                                        <?php echo e(Form::time("horarios[$index]['start_time']", $horario->start_time, ['class' => 'form-control', 'required' => 'required'])); ?>
+                                        <?php echo e(Form::time("horarios[$index][start_time]", \Carbon\Carbon::parse($horario->start_time)->format('H:i'), ['class' => 'form-control', 'required' => 'required'])); ?>
 
                                     </div>
                                     <div class="col-md-5">
                                         <?php echo e(Form::label("horarios[$index][end_time]", __('Hora de Fin'), ['class' => 'form-label'])); ?>
 
-                                        <?php echo e(Form::time("horarios[$index]['end_time']", $horario->end_time, ['class' => 'form-control', 'required' => 'required'])); ?>
+                                        <?php echo e(Form::time("horarios[$index][end_time]", \Carbon\Carbon::parse($horario->end_time)->format('H:i'), ['class' => 'form-control', 'required' => 'required'])); ?>
 
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button"
-                                            class="btn btn-danger remove-horario"><?php echo e(__('Eliminar')); ?></button>
+                                        <button type="button" class="btn btn-danger remove-horario"><?php echo e(__('Eliminar')); ?></button>
                                     </div>
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-                        <button type="button" class="btn btn-secondary"
-                            id="add-horario"><?php echo e(__('Agregar Horario')); ?></button>
+                        <button type="button" class="btn btn-secondary" id="add-horario"><?php echo e(__('Agregar Horario')); ?></button>
                     </div>
                     <button type="submit" class="btn btn-primary"><?php echo e(__('Actualizar')); ?></button>
                     <?php echo e(Form::close()); ?>
@@ -132,6 +129,7 @@
                 }
             });
         });
+
         document.getElementById('is_paid').addEventListener('change', function() {
             document.getElementById('cost_field').style.display = this.checked ? 'block' : 'none';
         });
