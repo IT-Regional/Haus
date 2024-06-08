@@ -20,8 +20,9 @@
             data-bs-original-title="<?php echo e(__('Create New Lead')); ?>">
             <i data-bs-toggle="tooltip" title="<?php echo e(__('Crear Amenidad')); ?>" class="ti ti-plus text-white"></i>
         </a>
-        <a href="<?php echo e(route('amenidades.export')); ?>" class="btn btn-sm btn-primary btn-icon m-1" data-title="<?php echo e(__('Export item CSV file')); ?>"
-         data-bs-toggle="tooltip" data-bs-original-title="<?php echo e(__('Export')); ?>">
+        <a href="<?php echo e(route('amenidades.export')); ?>" class="btn btn-sm btn-primary btn-icon m-1"
+            data-title="<?php echo e(__('Export item CSV file')); ?>" data-bs-toggle="tooltip"
+            data-bs-original-title="<?php echo e(__('Export')); ?>">
             <i class="ti ti-file-export"></i>
         </a>
     </div>
@@ -37,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th><?php echo e(__('Nombre')); ?></th>
-                                    <th><?php echo e(__('Descripcion')); ?></th>
                                     <th><?php echo e(__('Foto')); ?></th>
                                     <th><?php echo e(__('Capacidad')); ?></th>
                                     <th><?php echo e(__('Estado')); ?></th>
@@ -48,17 +48,21 @@
                                 <?php $__currentLoopData = $amenidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amenidad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($amenidad->name); ?></td>
-                                         <td>
+                                        <td>
                                             <img src="<?php echo e(asset($amenidad->photo)); ?>" alt="Foto" width="50">
                                         </td>
                                         <td><?php echo e($amenidad->ability); ?></td>
                                         <td><?php echo e($amenidad->status ? __('Reservada') : __('Disponible')); ?></td>
                                         <td>
-                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Editar')); ?>" href="<?php echo e(route('amenidades.edit', $amenidad->id)); ?>" class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
-                                            <form action="<?php echo e(route('amenidades.destroy', $amenidad->id)); ?>" method="POST" style="display: inline-block;">
+                                            <a data-bs-toggle="tooltip" title="<?php echo e(__('Editar')); ?>"
+                                                href="<?php echo e(route('amenidades.edit', $amenidad->id)); ?>"
+                                                class="btn btn-sm btn-primary"><i class="ti ti-pencil text-white"></i></a>
+                                            <form action="<?php echo e(route('amenidades.destroy', $amenidad->id)); ?>" method="POST"
+                                                style="display: inline-block;">
                                                 <?php echo csrf_field(); ?>
                                                 <?php echo method_field('DELETE'); ?>
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta amenidad?');"><?php echo e(__('Eliminar')); ?></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta amenidad?');"><?php echo e(__('Eliminar')); ?></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -71,4 +75,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\main-file\main-file\resources\views/amenidades/index.blade.php ENDPATH**/ ?>

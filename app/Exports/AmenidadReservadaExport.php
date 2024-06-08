@@ -7,8 +7,11 @@ use App\Models\Amenidad;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class AmenidadReservadaExport implements FromCollection, WithHeadings
+class AmenidadReservadaExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -16,7 +19,7 @@ class AmenidadReservadaExport implements FromCollection, WithHeadings
     public function collection()
     {
          $reservas = Reserva::with(['amenidad', 'user'])->get();
-        
+    
         // Formatea los datos
         $data = $reservas->map(function($reserva) {
             return [
@@ -39,6 +42,14 @@ class AmenidadReservadaExport implements FromCollection, WithHeadings
             'Fecha de Reserva',
             'Hora de Inicio',
             'Hora de Fin',
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Estilo para los encabezados
+            1 => ['font' => ['bold' => true]],
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Amenidad;
 use App\Models\Reserva;
 use App\Models\Horario;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class ReservasController extends Controller
@@ -60,6 +61,12 @@ class ReservasController extends Controller
 
         list($start_time, $end_time) = explode('|', $request->horario);
 
+        /* $startDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->fecha_reserva . ' ' . $start_time);
+        if ($startDateTime->isPast()) {
+            return redirect()->back()->withErrors(['horario' => 'El horario seleccionado ya ha pasado.']);
+        }
+ */
+
         // Crear la reserva
         Reserva::create([
             'amenidad_id' => $request->amenidad_id,
@@ -87,7 +94,7 @@ class ReservasController extends Controller
         // Registrar el error y redirigir con un mensaje de error
         \Log::error('Error al crear la reserva: ' . $e->getMessage());
         return redirect()->route('reservas.create', ['amenidad_id' => $request->amenidad_id])
-                         ->with('error', 'Hubo un problema al crear la reserva. Por favor, inténtalo de nuevo.');
+                         ->with('error', $e->getMessage());
     }
 }
 
