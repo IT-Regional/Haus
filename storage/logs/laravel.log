@@ -22148,3 +22148,5 @@
 #49 C:\\xampp\\htdocs\\main-file\\main-file\\index.php(21): require_once('C:\\\\xampp\\\\htdocs...')
 #50 {main}
 "} 
+[2024-06-10 22:47:09] local.ERROR: Error al crear la reserva: No puedes reservar una amenidad en una fecha anterior a la de hoy.  
+[2024-06-10 22:49:08] local.ERROR: Error al crear la reserva: No puedes reservar una amenidad en una fecha anterior a la de hoy.  
