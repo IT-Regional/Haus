@@ -44,7 +44,8 @@
                         {{ Form::label('is_paid', __('¿Es de pago?'), ['class' => 'form-label']) }}
                         {{ Form::checkbox('is_paid', true, $amenidad->is_paid, ['id' => 'is_paid']) }}
                     </div>
-                    <div class="form-group" id="cost_field" style="{{ $amenidad->is_paid ? 'display:block;' : 'display:none;' }}">
+                    <div class="form-group" id="cost_field"
+                        style="{{ $amenidad->is_paid ? 'display:block;' : 'display:none;' }}">
                         {{ Form::label('cost', __('Costo'), ['class' => 'form-label']) }}
                         {{ Form::number('cost', $amenidad->cost, ['class' => 'form-control', 'step' => '0.01']) }}
                     </div>
@@ -63,12 +64,14 @@
                                         {{ Form::time("horarios[$index][end_time]", \Carbon\Carbon::parse($horario->end_time)->format('H:i'), ['class' => 'form-control', 'required' => 'required']) }}
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button" class="btn btn-danger remove-horario">{{ __('Eliminar') }}</button>
+                                        <button type="button"
+                                            class="btn btn-danger remove-horario">{{ __('Eliminar') }}</button>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <button type="button" class="btn btn-secondary" id="add-horario">{{ __('Agregar Horario') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            id="add-horario">{{ __('Agregar Horario') }}</button>
                     </div>
                     <button type="submit" class="btn btn-primary">{{ __('Actualizar') }}</button>
                     {{ Form::close() }}
