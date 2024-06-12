@@ -149,8 +149,44 @@ class AmenidadesController extends Controller
         return view('amenidades.reservas', compact('reservas'));
     }
 
-    public function export(){
+    /* public function export(){
         return Excel::download(new AmenidadReservadaExport, 'amenidades_reservadas.xlsx');
+    } */
+   public function export(Request $request)
+    {
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
+
+        return Excel::download(new AmenidadReservadaExport($startDate, $endDate), 'amenidades_reservadas.xlsx');
+    }
+
+    public function exportDaily()
+    {
+        $startDate = Carbon::today();
+        $endDate = Carbon::tomorrow()->subSecond();
+
+        return $this->exportWithDates($startDate, $endDate);
+    }
+
+    public function exportWeekly()
+    {
+        $startDate = Carbon::now()->startOfWeek();
+        $endDate = Carbon::now()->endOfWeek();
+
+        return $this->exportWithDates($startDate, $endDate);
+    }
+
+    public function exportMonthly()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+
+        return $this->exportWithDates($startDate, $endDate);
+    }
+
+    protected function exportWithDates($startDate, $endDate)
+    {
+        return Excel::download(new AmenidadReservadaExport($startDate, $endDate), 'amenidades_reservadas.xlsx');
     }
 
   

@@ -1925,10 +1925,12 @@ Route::resource('amenidades', AmenidadesController::class)->except(['show']);
 Route::get('amenidades/reservas', [AmenidadesController::class, 'reservas'])->name('amenidades.reservas');
 Route::delete('amenidades/{id}', [AmenidadesController::class, 'destroy'])->name('amenidades.destroy');
 Route::get('/amennidades/export', [AmenidadesController::class, 'export'])->name('amenidades.export');
+Route::get('export/daily', [AmenidadesController::class, 'exportDaily'])->name('export.daily');
+Route::get('export/weekly', [AmenidadesController::class, 'exportWeekly'])->name('export.weekly');
+Route::get('export/monthly', [AmenidadesController::class, 'exportMonthly'])->name('export.monthly');
 Route::get('amenidades/calendar', [AmenidadesController::class, 'calendar'])->name('amenidades.calendar');
 
 Route::get('/reservas/create/{amenidad_id}', [ReservasController::class, 'create'])->name('reservas.create');
-/* Route::post('reservas/{amenidad}', [ReservasController::class, 'store'])->name('reservas.store'); */
 Route::post('reservas', [ReservasController::class, 'store'])->name('reservas.store');
 Route::get('reservas/reservadas', [ReservasController::class, 'reservadas'])->name('reservas.reservadas');
 Route::get('reservas{id}', [AmenidadesController::class, 'show'])->name('amenidades.show');
